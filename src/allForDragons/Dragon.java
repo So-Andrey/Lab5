@@ -19,13 +19,13 @@ public class Dragon {
         UUID myuuid = UUID.randomUUID();
         id = (int)(myuuid.getMostSignificantBits()); //TODO MostSignificantBits нельзя
         id = java.lang.Math.abs(id);
-        this.name=name;
-        this.age=age;
-        this.coordinates=coordinates;
-        this.character=character;
-        this.head=head;
-        this.type=type;
-        this.color=color;
+        this.name = name;
+        this.age = age;
+        this.coordinates = coordinates;
+        this.character = character;
+        this.head = head;
+        this.type = type;
+        this.color = color;
     }
     @Override
     public boolean equals(Object o) {

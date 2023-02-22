@@ -27,8 +27,10 @@ public class Executor {
                 "filter_starts_with_name name : вывести элементы, значение поля name которых начинается с заданной подстроки\n" +
                 "print_ascending : вывести элементы коллекции в порядке возрастания\n" +
                 "print_descending : вывести элементы коллекции в порядке убывания");
+
         Scanner scanner = new Scanner(System.in);
         HashMap<String, Command> commandHashMap = new HashMap<>();
+
         commandHashMap.put("help", new HelpCommand());
         commandHashMap.put("info", new InfoCommand());
         commandHashMap.put("show", new ShowCommand());
