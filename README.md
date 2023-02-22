@@ -1,5 +1,4 @@
-<p align="center" style ="font-size: 24px"><strong>Лабораторная работа №5 </br>
-По дисциплине : «Программирование»</br>
+<p align="center" style ="font-size: 24px"><strong>Лабораторная работа №5 по дисциплине «Программирование»</br>
 Вариант 125610</strong>
 </p>
 <p align="left">Преподаватель: <strong>Райла Мартин</strong></br>
