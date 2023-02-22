@@ -78,7 +78,7 @@ public class AddCommand implements Command {
                 Double eyesCount = sc.nextDouble();
                 DragonHead dragonHead = new DragonHead(eyesCount);
 
-                DragonsCollection.getDragons().add(new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead));
+                DragonsCollection.dragons.add(new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead));
                 i = 1;
             } catch (InputMismatchException inputMismatchException) {
                 System.out.println("Неверный тип данных");

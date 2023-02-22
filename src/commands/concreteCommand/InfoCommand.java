@@ -7,11 +7,11 @@ public class InfoCommand implements Command {
     @Override
     public void execute() {
 
-        String type = DragonsCollection.getDragons().getClass().getTypeName();
+        String type = DragonsCollection.dragons.getClass().getTypeName();
         String[] typeArray = type.split(".util.");
         type = typeArray[1];
         System.out.println("Тип коллекции: " + type + "\n" +
                 "Дата инициализации: " + DragonsCollection.dateOfInitialization + "\n" +
-                "Количество элементов: " + DragonsCollection.getDragons().size());
+                "Количество элементов: " + DragonsCollection.dragons.size());
     }
 }

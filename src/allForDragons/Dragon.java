@@ -17,8 +17,11 @@ public class Dragon {
     public Dragon(String name, Coordinates coordinates, Long age, Color color, DragonType type, DragonCharacter character, DragonHead head){
         creationDate = new Date();
         UUID myuuid = UUID.randomUUID();
-        id = (int)(myuuid.getMostSignificantBits()); //TODO MostSignificantBits нельзя
-        id = java.lang.Math.abs(id);
+        id = myuuid.getMostSignificantBits();
+        while (id < 0) {
+            myuuid = UUID.randomUUID();
+            id = myuuid.getMostSignificantBits();
+        }
         this.name = name;
         this.age = age;
         this.coordinates = coordinates;
@@ -37,5 +40,41 @@ public class Dragon {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, coordinates, creationDate, age, color, type, character, head);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public DragonType getType() {
+        return type;
+    }
+
+    public DragonCharacter getCharacter() {
+        return character;
+    }
+
+    public DragonHead getHead() {
+        return head;
     }
 }
