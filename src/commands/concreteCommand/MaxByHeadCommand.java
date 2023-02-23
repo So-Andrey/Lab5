@@ -2,7 +2,7 @@ package commands.concreteCommand;
 
 import commands.Command;
 
-public class FilterStartsWithNameCommand implements Command {
+public class MaxByHeadCommand implements Command {
 
     @Override
     public void execute() {

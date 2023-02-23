@@ -31,9 +31,9 @@ public class Executor {
         commandHashMap.put("add_if_min", new AddIfMinCommand());
         commandHashMap.put("remove_greater", new RemoveGreater());
         commandHashMap.put("remove_lower", new RemoveLower());
-        commandHashMap.put("filter_starts_with_name", new FilterStartsWithNameCommand());
+        commandHashMap.put("max_by_head", new MaxByHeadCommand());
+        commandHashMap.put("count_by_head", new CountByHead());
         commandHashMap.put("print_ascending", new PrintAscendingCommand());
-        commandHashMap.put("print_descending", new PrintDescendingCommand());
 
         while (programRunning == 1) {
 
