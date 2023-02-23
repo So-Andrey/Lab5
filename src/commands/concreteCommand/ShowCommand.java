@@ -28,7 +28,7 @@ public class ShowCommand implements Command {
                             "Характер: " + dragons[i].getCharacter() + "\n" +
                             "Количество глаз: " + dragons[i].getHead().getEyesCount() + "\n" +
                             "Координаты: (" + dragons[i].getCoordinates().getX() + "; " + dragons[i].getCoordinates().getY() + ")\n" +
-                            "Дата и время создания: " + dragons[i].getCreationDate() + "\n");
+                            "Дата и время создания: " + dragons[i].getCreationDate());
                 }
             }
 
