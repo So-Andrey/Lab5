@@ -7,6 +7,10 @@ public class ExitCommand implements Command {
 
     @Override
     public void execute() {
-        Executor.programRunning = 0;
+        if (Executor.split.length == 1) {
+            Executor.programRunning = 0;
+        } else {
+            System.out.println("Неверная команда");
+        }
     }
 }

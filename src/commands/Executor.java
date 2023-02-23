@@ -9,6 +9,8 @@ public class Executor {
 
     public static int programRunning = 1;
 
+    public static String[] split;
+
     public static void executor() {
 
         System.out.println("Введите команду (help : вывести справку по доступным командам)");
@@ -37,7 +39,8 @@ public class Executor {
 
             try {
 
-                Command command = commandHashMap.get(scanner.nextLine());
+                split = scanner.nextLine().split(" ");
+                Command command = commandHashMap.get(split[0]);
                 command.execute();
 
             } catch (Exception exception) {
