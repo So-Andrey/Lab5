@@ -7,5 +7,7 @@ public class PrintAscendingCommand implements Command {
     @Override
     public void execute() {
 
+
+
     }
 }

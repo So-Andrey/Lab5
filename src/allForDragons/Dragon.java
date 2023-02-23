@@ -8,7 +8,7 @@ public class Dragon {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private final java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Long age; //Значение поля должно быть больше 0, Поле не может быть null
     private Color color; //Поле может быть null
     private DragonType type; //Поле не может быть null
@@ -76,5 +76,37 @@ public class Dragon {
 
     public DragonHead getHead() {
         return head;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setType(DragonType type) {
+        this.type = type;
+    }
+
+    public void setCharacter(DragonCharacter character) {
+        this.character = character;
+    }
+
+    public void setHead(DragonHead head) {
+        this.head = head;
     }
 }

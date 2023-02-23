@@ -4,5 +4,5 @@ public enum DragonCharacter {
     CUNNING,
     WISE,
     CHAOTIC_EVIL,
-    FICKLE;
+    FICKLE
 }

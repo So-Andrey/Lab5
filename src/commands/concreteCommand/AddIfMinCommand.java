@@ -4,5 +4,9 @@ import commands.Command;
 
 public class AddIfMinCommand implements Command {
     @Override
-    public void execute() {}
+    public void execute() {
+
+
+
+    }
 }
