@@ -19,10 +19,10 @@ public class AddCommand implements Command {
             long x = 0;
             float y = 0;
             Color dragonColor = null;
-            Long age = Long.valueOf(0);
+            Long age = Long.parseLong("0");
             DragonType dragonType = DragonType.WATER;
             DragonCharacter dragonCharacter = DragonCharacter.FICKLE;
-            Double eyesCount= Double.valueOf(0);
+            Double eyesCount = Double.parseDouble("0");
             while (i != 0) {
                 try {
                     while (i==1) {
@@ -40,7 +40,7 @@ public class AddCommand implements Command {
                             if(!s.matches("([-+]?\\d+)")){
                                 throw new InputMismatchException();
                             }
-                            x=Long.valueOf(s);
+                            x=Long.parseLong(s);
                             if (x > 610) {
                                 throw new IllegalValueOfXException();
                             }
@@ -57,7 +57,7 @@ public class AddCommand implements Command {
                         }catch (NumberFormatException ex){
                             throw new InputMismatchException();
                         }
-                        y=Float.valueOf(s);
+                        y=Float.parseFloat(s);
                         i = 4;
                     }
                     Coordinates coordinates = new Coordinates(x, y);
@@ -79,10 +79,13 @@ public class AddCommand implements Command {
                         switch (color) {
                             case "1", "GREEN":
                                 dragonColor = Color.GREEN;
+                                break;
                             case "2", "ORANGE":
                                 dragonColor = Color.ORANGE;
+                                break;
                             case "3", "BROWN":
                                 dragonColor = Color.BROWN;
+                                break;
                         }
                         i=6;
                     }
@@ -95,10 +98,13 @@ public class AddCommand implements Command {
                         switch (type) {
                             case "1", "WATER":
                                 dragonType = DragonType.WATER;
+                                break;
                             case "2", "UNDERGROUND":
                                 dragonType = DragonType.UNDERGROUND;
+                                break;
                             case "3", "FIRE":
                                 dragonType = DragonType.FIRE;
+                                break;
                         }
                         i=7;
                     }
@@ -111,12 +117,16 @@ public class AddCommand implements Command {
                         switch (character) {
                             case "1", "CUNNING":
                                 dragonCharacter = DragonCharacter.CUNNING;
+                                break;
                             case "2", "WISE":
                                 dragonCharacter = DragonCharacter.WISE;
+                                break;
                             case "3", "CHAOTIC_EVIL":
                                 dragonCharacter = DragonCharacter.CHAOTIC_EVIL;
+                                break;
                             case "4", "FICKLE":
                                 dragonCharacter = DragonCharacter.FICKLE;
+                                break;
                         }
                         i=8;
                     }
