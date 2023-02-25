@@ -77,15 +77,9 @@ public class AddCommand implements Command {
                             throw new InputMismatchException();
                         }
                         switch (color) {
-                            case "1", "GREEN":
-                                dragonColor = Color.GREEN;
-                                break;
-                            case "2", "ORANGE":
-                                dragonColor = Color.ORANGE;
-                                break;
-                            case "3", "BROWN":
-                                dragonColor = Color.BROWN;
-                                break;
+                            case "1", "GREEN" -> dragonColor = Color.GREEN;
+                            case "2", "ORANGE" -> dragonColor = Color.ORANGE;
+                            case "3", "BROWN" -> dragonColor = Color.BROWN;
                         }
                         i=6;
                     }
@@ -96,15 +90,9 @@ public class AddCommand implements Command {
                             throw new InputMismatchException();
                         }
                         switch (type) {
-                            case "1", "WATER":
-                                dragonType = DragonType.WATER;
-                                break;
-                            case "2", "UNDERGROUND":
-                                dragonType = DragonType.UNDERGROUND;
-                                break;
-                            case "3", "FIRE":
-                                dragonType = DragonType.FIRE;
-                                break;
+                            case "1", "WATER" -> dragonType = DragonType.WATER;
+                            case "2", "UNDERGROUND" -> dragonType = DragonType.UNDERGROUND;
+                            case "3", "FIRE" -> dragonType = DragonType.FIRE;
                         }
                         i=7;
                     }
@@ -115,18 +103,10 @@ public class AddCommand implements Command {
                             throw new InputMismatchException();
                         }
                         switch (character) {
-                            case "1", "CUNNING":
-                                dragonCharacter = DragonCharacter.CUNNING;
-                                break;
-                            case "2", "WISE":
-                                dragonCharacter = DragonCharacter.WISE;
-                                break;
-                            case "3", "CHAOTIC_EVIL":
-                                dragonCharacter = DragonCharacter.CHAOTIC_EVIL;
-                                break;
-                            case "4", "FICKLE":
-                                dragonCharacter = DragonCharacter.FICKLE;
-                                break;
+                            case "1", "CUNNING" -> dragonCharacter = DragonCharacter.CUNNING;
+                            case "2", "WISE" -> dragonCharacter = DragonCharacter.WISE;
+                            case "3", "CHAOTIC_EVIL" -> dragonCharacter = DragonCharacter.CHAOTIC_EVIL;
+                            case "4", "FICKLE" -> dragonCharacter = DragonCharacter.FICKLE;
                         }
                         i=8;
                     }

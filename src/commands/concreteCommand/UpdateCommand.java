@@ -85,10 +85,18 @@ public class UpdateCommand implements Command {
                                         switch (color) {
                                             case "1", "GREEN":
                                                 dragon.setColor(Color.GREEN);
+                                                break;
                                             case "2", "ORANGE":
                                                 dragon.setColor(Color.ORANGE);
+                                                break;
                                             case "3", "BROWN":
                                                 dragon.setColor(Color.BROWN);
+                                                break;
+                                            case "":
+                                                dragon.setColor(null);
+                                                break;
+                                            default:
+                                                throw new InputMismatchException();
                                         }
                                         break;
                                     case "5":
