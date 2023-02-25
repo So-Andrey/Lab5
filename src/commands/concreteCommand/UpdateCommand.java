@@ -20,22 +20,21 @@ public class UpdateCommand implements Command {
                 for (Dragon dragon : DragonsCollection.dragons) {
                     if (dragon.getId() == id) {
 
-                        //boolean i = true;
-                        //while (i) {
                         Scanner scanner = new Scanner(System.in);
                         int i = 1;
                         while (i != 0) {
                             try {
                                 String s = "";
                                 while (i == 1) {
-                                    System.out.println("Выберите параметр дракона, который хотите изменить:\n" +
-                                            "Имя - введите  1\n" +
-                                            "Возраст - введите 2\n" +
-                                            "Тип - введите 3\n" +
-                                            "Цвет - введите 4\n" +
-                                            "Характер - введите 5\n" +
-                                            "Количество глаз - введите 6\n" +
-                                            "Координаты - введите 7");
+                                    System.out.println("""
+                                            Выберите параметр дракона, который хотите изменить:
+                                            Имя - введите  1
+                                            Возраст - введите 2
+                                            Тип - введите 3
+                                            Цвет - введите 4
+                                            Характер - введите 5
+                                            Количество глаз - введите 6
+                                            Координаты - введите 7""");
                                     s = scanner.nextLine();
                                     i = 2;
                                 }
@@ -68,12 +67,9 @@ public class UpdateCommand implements Command {
                                             throw new InputMismatchException();
                                         }
                                         switch (type) {
-                                            case "1", "WATER":
-                                                dragon.setType(DragonType.WATER);
-                                            case "2", "UNDERGROUND":
-                                                dragon.setType(DragonType.UNDERGROUND);
-                                            case "3", "FIRE":
-                                                dragon.setType(DragonType.FIRE);
+                                            case "1", "WATER" -> dragon.setType(DragonType.WATER);
+                                            case "2", "UNDERGROUND" -> dragon.setType(DragonType.UNDERGROUND);
+                                            case "3", "FIRE" -> dragon.setType(DragonType.FIRE);
                                         }
                                         break;
                                     case "4":
@@ -83,20 +79,10 @@ public class UpdateCommand implements Command {
                                             throw new InputMismatchException();
                                         }
                                         switch (color) {
-                                            case "1", "GREEN":
-                                                dragon.setColor(Color.GREEN);
-                                                break;
-                                            case "2", "ORANGE":
-                                                dragon.setColor(Color.ORANGE);
-                                                break;
-                                            case "3", "BROWN":
-                                                dragon.setColor(Color.BROWN);
-                                                break;
-                                            case "":
-                                                dragon.setColor(null);
-                                                break;
-                                            default:
-                                                throw new InputMismatchException();
+                                            case "1", "GREEN" -> dragon.setColor(Color.GREEN);
+                                            case "2", "ORANGE" -> dragon.setColor(Color.ORANGE);
+                                            case "3", "BROWN" -> dragon.setColor(Color.BROWN);
+                                            case "" -> dragon.setColor(null);
                                         }
                                         break;
                                     case "5":
@@ -106,14 +92,10 @@ public class UpdateCommand implements Command {
                                             throw new InputMismatchException();
                                         }
                                         switch (character) {
-                                            case "1", "CUNNING":
-                                                dragon.setCharacter(DragonCharacter.CUNNING);
-                                            case "2", "WISE":
-                                                dragon.setCharacter(DragonCharacter.WISE);
-                                            case "3", "CHAOTIC_EVIL":
-                                                dragon.setCharacter(DragonCharacter.CHAOTIC_EVIL);
-                                            case "4", "FICKLE":
-                                                dragon.setCharacter(DragonCharacter.FICKLE);
+                                            case "1", "CUNNING" -> dragon.setCharacter(DragonCharacter.CUNNING);
+                                            case "2", "WISE" -> dragon.setCharacter(DragonCharacter.WISE);
+                                            case "3", "CHAOTIC_EVIL" -> dragon.setCharacter(DragonCharacter.CHAOTIC_EVIL);
+                                            case "4", "FICKLE" -> dragon.setCharacter(DragonCharacter.FICKLE);
                                         }
                                         break;
                                     case "6":
@@ -135,7 +117,7 @@ public class UpdateCommand implements Command {
                                                 if (!str.matches("([-+]?\\d+)")) {
                                                     throw new InputMismatchException();
                                                 }
-                                                x = Long.valueOf(str);
+                                                x = Long.parseLong(str);
                                                 if (x > 610) {
                                                     throw new IllegalValueOfXException();
                                                 }
@@ -149,12 +131,13 @@ public class UpdateCommand implements Command {
                                             str=scanner.nextLine();
                                             try {
                                                 Double.parseDouble(str);
-                                            }catch (NumberFormatException ex){
+                                            } catch (NumberFormatException ex){
                                                 throw new InputMismatchException();
                                             }
-                                            float y=Float.valueOf(str);
+                                            float y=Float.parseFloat(str);
                                             Coordinates coordinates = new Coordinates(x, y);
                                             dragon.setCoordinates(coordinates);
+                                            i = 4;
                                         }
                                         break;
                                 }
@@ -165,8 +148,6 @@ public class UpdateCommand implements Command {
                             }
                         }
                     }
-                    //i = false;
-                    //}
                     else {
                         System.out.println("Такого дракона не существует");
                     }
