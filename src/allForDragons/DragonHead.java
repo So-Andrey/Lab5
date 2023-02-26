@@ -7,11 +7,8 @@ public class DragonHead {
         return eyesCount;
     }
 
-    public void setEyesCount(Double eyesCount) {
-        this.eyesCount = eyesCount;
-    }
-
     public DragonHead(Double eyesCount){
         this.eyesCount=eyesCount;
     }
+
 }

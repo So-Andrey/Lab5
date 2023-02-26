@@ -107,7 +107,14 @@ public class Dragon implements Comparable<Dragon>{
     }
 
     @Override
-    public int compareTo(Dragon o) {
-        return (int)(this.age-o.getAge());
+    public int compareTo(Dragon dragon) {
+        int result = 0;
+        if (this.age < dragon.getAge()) {
+            result = -1;
+        }
+        if (this.age > dragon.getAge()) {
+            result = 1;
+        }
+        return result;
     }
 }
