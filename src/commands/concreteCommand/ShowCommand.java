@@ -11,15 +11,13 @@ public class ShowCommand implements Command {
 
         if (Executor.split.length == 1) {
 
-            Dragon[] dragons = DragonsCollection.dragons.toArray(new Dragon[0]);
-
-            if (dragons.length == 0) {
+            if (DragonsCollection.dragons.size() == 0) {
 
                 System.out.println("Коллекция пуста");
 
             } else {
 
-                for (Dragon dragon : dragons) {
+                for (Dragon dragon : DragonsCollection.dragons) {
                     System.out.println("Дракон " + dragon.getId() + "\n" +
                             "Имя: " + dragon.getName() + "\n" +
                             "Возраст: " + dragon.getAge() + "\n" +
@@ -28,7 +26,7 @@ public class ShowCommand implements Command {
                             "Характер: " + dragon.getCharacter() + "\n" +
                             "Количество глаз: " + dragon.getHead().getEyesCount() + "\n" +
                             "Координаты: (" + dragon.getCoordinates().getX() + "; " + dragon.getCoordinates().getY() + ")\n" +
-                            "Дата и время создания: " + dragon.getCreationDate() + "\n");
+                            "Дата и время создания: " + dragon.getCreationDate());
                 }
             }
 

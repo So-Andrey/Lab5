@@ -29,10 +29,10 @@ public class Executor {
         commandHashMap.put("execute_script", new ExecuteScriptCommand());
         commandHashMap.put("exit", new ExitCommand());
         commandHashMap.put("add_if_min", new AddIfMinCommand());
-        commandHashMap.put("remove_greater", new RemoveGreater());
-        commandHashMap.put("remove_lower", new RemoveLower());
+        commandHashMap.put("remove_greater", new RemoveGreaterCommand());
+        commandHashMap.put("remove_lower", new RemoveLowerCommand());
         commandHashMap.put("max_by_head", new MaxByHeadCommand());
-        commandHashMap.put("count_by_head", new CountByHead());
+        commandHashMap.put("count_by_head", new CountByHeadCommand());
         commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
         while (programRunning == 1) {

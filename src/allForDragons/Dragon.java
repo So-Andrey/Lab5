@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import java.util.Date;
-public class Dragon {
+public class Dragon implements Comparable<Dragon>{
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -104,5 +104,10 @@ public class Dragon {
 
     public void setHead(DragonHead head) {
         this.head = head;
+    }
+
+    @Override
+    public int compareTo(Dragon o) {
+        return (int)(this.age-o.getAge());
     }
 }
