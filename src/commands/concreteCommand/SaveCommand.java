@@ -4,7 +4,6 @@ import allForDragons.Dragon;
 import allForDragons.DragonsCollection;
 import commands.Command;
 import commands.Executor;
-
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
