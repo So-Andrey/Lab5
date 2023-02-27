@@ -1,5 +1,6 @@
 package commands;
 
+import allForDragons.DragonsCollection;
 import commands.concreteCommand.*;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class Executor {
             if (args[0].trim().split("\\.")[args[0].split("\\.").length - 1].equals("csv")) {
 
                 file = args[0];
+                DragonsCollection.putDragonsFromFile();
 
                 System.out.println("Введите команду (help : вывести справку по доступным командам)");
                 Scanner scanner = new Scanner(System.in);
