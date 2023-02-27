@@ -11,43 +11,46 @@ public class Executor {
 
     public static String[] split;
 
-    public static void executor() {
+    public static String file;
 
-        System.out.println("Введите команду (help : вывести справку по доступным командам)");
+    public static void executor(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        HashMap<String, Command> commandHashMap = new HashMap<>();
+        if (args.length == 1 & args[0].trim().split("\\.")[args.length - 1].equals("csv")) {
 
-        commandHashMap.put("help", new HelpCommand());
-        commandHashMap.put("info", new InfoCommand());
-        commandHashMap.put("show", new ShowCommand());
-        commandHashMap.put("add", new AddCommand());
-        commandHashMap.put("update", new UpdateCommand());
-        commandHashMap.put("remove_by_id", new RemoveByIdCommand());
-        commandHashMap.put("clear", new ClearCommand());
-        commandHashMap.put("save", new SaveCommand());
-        commandHashMap.put("execute_script", new ExecuteScriptCommand());
-        commandHashMap.put("exit", new ExitCommand());
-        commandHashMap.put("add_if_min", new AddIfMinCommand());
-        commandHashMap.put("remove_greater", new RemoveGreaterCommand());
-        commandHashMap.put("remove_lower", new RemoveLowerCommand());
-        commandHashMap.put("max_by_head", new MaxByHeadCommand());
-        commandHashMap.put("count_by_head", new CountByHeadCommand());
-        commandHashMap.put("print_ascending", new PrintAscendingCommand());
+            file = args[0];
 
-        while (programRunning == 1) {
+            System.out.println("Введите команду (help : вывести справку по доступным командам)");
+            Scanner scanner = new Scanner(System.in);
+            HashMap<String, Command> commandHashMap = new HashMap<>();
 
-            try {
+            commandHashMap.put("help", new HelpCommand());
+            commandHashMap.put("info", new InfoCommand());
+            commandHashMap.put("show", new ShowCommand());
+            commandHashMap.put("add", new AddCommand());
+            commandHashMap.put("update", new UpdateCommand());
+            commandHashMap.put("remove_by_id", new RemoveByIdCommand());
+            commandHashMap.put("clear", new ClearCommand());
+            commandHashMap.put("save", new SaveCommand());
+            commandHashMap.put("execute_script", new ExecuteScriptCommand());
+            commandHashMap.put("exit", new ExitCommand());
+            commandHashMap.put("add_if_min", new AddIfMinCommand());
+            commandHashMap.put("remove_greater", new RemoveGreaterCommand());
+            commandHashMap.put("remove_lower", new RemoveLowerCommand());
+            commandHashMap.put("max_by_head", new MaxByHeadCommand());
+            commandHashMap.put("count_by_head", new CountByHeadCommand());
+            commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
-                split = scanner.nextLine().split(" ");
-                Command command = commandHashMap.get(split[0]);
-                command.execute();
-
-            } catch (Exception exception) {
-
-                System.out.println("Неверная команда");
-
+            while (programRunning == 1) {
+                try {
+                    split = scanner.nextLine().split(" ");
+                    Command command = commandHashMap.get(split[0]);
+                    command.execute();
+                } catch (Exception exception) {
+                    System.out.println("Неверная команда");
+                }
             }
+        } else {
+            System.out.println("Неверно указано имя файла");
         }
     }
 }
