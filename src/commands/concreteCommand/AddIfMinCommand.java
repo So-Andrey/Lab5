@@ -30,7 +30,7 @@ public class AddIfMinCommand implements Command {
                     while (i == 1) {
                         System.out.println("Введите имя дракона");
                         name = sc.nextLine();
-                        if (!name.matches("^[a-zA-Z]*$")) {
+                        if (name.trim().isEmpty()) {
                             throw new InputMismatchException();
                         }
                         i = 2;

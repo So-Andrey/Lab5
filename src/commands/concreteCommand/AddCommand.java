@@ -28,7 +28,7 @@ public class AddCommand implements Command {
                     while (i==1) {
                         System.out.println("Введите имя дракона");
                         name = sc.nextLine();
-                        if (!name.matches("^[a-zA-Z]*$")) {
+                        if (name.trim().isEmpty()) {
                             throw new InputMismatchException();
                         }
                         i = 2;
@@ -123,7 +123,7 @@ public class AddCommand implements Command {
                     }
                     DragonHead dragonHead = new DragonHead(eyesCount);
                     DragonsCollection.dragons.add(new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead));
-                    System.out.println("Новый элемент колекции добавлен");
+                    System.out.println("Новый элемент коллекции добавлен");
                     i=0;
                 } catch (InputMismatchException inputMismatchException) {
                     System.out.println("Неверный тип данных");

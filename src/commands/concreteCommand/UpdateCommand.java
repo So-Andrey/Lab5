@@ -42,7 +42,7 @@ public class UpdateCommand implements Command {
                                 while (i == 1) {
                                     System.out.println("Введите имя дракона");
                                     String name = scanner.nextLine();
-                                    if (name.matches("^[a-zA-Z]*$")) {
+                                    if (name.trim().isEmpty()) {
                                         dragon.setName(name);
                                         i = 2;
                                     } else {
