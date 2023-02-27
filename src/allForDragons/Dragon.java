@@ -18,7 +18,7 @@ public class Dragon implements Comparable<Dragon>{
         creationDate = new Date();
         UUID myuuid = UUID.randomUUID();
         id = myuuid.getMostSignificantBits();
-        while (id < 0) {
+        while (id <= 0) {
             myuuid = UUID.randomUUID();
             id = myuuid.getMostSignificantBits();
         }
