@@ -18,7 +18,7 @@ public class Executor {
 
         if (args.length == 1) {
 
-            if (args[0].trim().split("\\.")[args[0].split("\\.").length - 1].equals("csv")) {
+            if (args[0].endsWith(".csv")) {
 
                 file = args[0];
                 DragonsCollection.putDragonsFromFile();
