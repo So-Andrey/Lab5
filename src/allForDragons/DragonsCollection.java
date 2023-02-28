@@ -38,7 +38,7 @@ public class DragonsCollection {
                         age = Long.parseLong(dragon[1]);
                         x = Long.parseLong(dragon[2]);
                         y = Float.parseFloat(dragon[3]);
-                        if (dragon[4].equals("GREEN")||dragon[4].equals("ORANGE")||dragon[4].equals("BROWN")||dragon[4].equals("null")|dragon[5].equals("WATER")||dragon[5].equals("UNDERGROUND")||dragon[5].equals("FIRE")||dragon[6].equals("CUNNING")||dragon[6].equals("CHAOTIC_EVIL")||dragon[6].equals("WISE")||dragon[6].equals("FICKLE")) {
+                        if (dragon[4].equals("GREEN") || dragon[4].equals("ORANGE") || dragon[4].equals("BROWN") || dragon[4].equals("null") | dragon[5].equals("WATER") || dragon[5].equals("UNDERGROUND") || dragon[5].equals("FIRE") || dragon[6].equals("CUNNING") || dragon[6].equals("CHAOTIC_EVIL") || dragon[6].equals("WISE") || dragon[6].equals("FICKLE")) {
                             switch (dragon[4]) {
                                 case "GREEN" -> color = Color.GREEN;
                                 case "ORANGE" -> color = Color.ORANGE;
@@ -63,8 +63,8 @@ public class DragonsCollection {
                         dragons.add(new Dragon(name, new Coordinates(x, y), age, color, type, character, new DragonHead(eyesCount)));
                     } catch (Exception ignored) {}
                 }
-                scan = scanner.hasNext();
-            } catch (NoSuchElementException ignore) {}
+            } catch (Exception ignored) {}
+            scan = scanner.hasNext();
         }
     }
 }

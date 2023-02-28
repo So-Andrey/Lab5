@@ -55,7 +55,7 @@ public class Executor {
                             Command command = commandHashMap.get(split[0]);
                             command.execute();
                         } catch (Exception exception) {
-                            System.out.println("Неверная команда");
+                            System.out.println("Неверная команда"); //TODO control+D
                         }
                     }
                 } else {
