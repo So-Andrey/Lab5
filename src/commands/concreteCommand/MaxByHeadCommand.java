@@ -14,7 +14,7 @@ public class MaxByHeadCommand implements Command {
     @Override
     public void execute() {
         if (Executor.split.length == 1) {
-            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.dragons);
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             HeadComparator headComparator = new HeadComparator();
             Dragon dragon = Collections.max(dragons, headComparator);
             System.out.println("Дракон " + dragon.getId() + "\n" +

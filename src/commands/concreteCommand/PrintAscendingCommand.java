@@ -12,7 +12,7 @@ public class PrintAscendingCommand implements Command {
     @Override
     public void execute() {
         if (Executor.split.length == 1) {
-            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.dragons);
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             if (dragons.size() == 0) {
 
                 System.out.println("Коллекция пуста");

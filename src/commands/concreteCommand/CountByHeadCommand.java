@@ -13,7 +13,7 @@ public class CountByHeadCommand implements Command {
         if (Executor.split.length == 2) {
             double eyesCount = Double.parseDouble(Executor.split[1]);
             int countByHead = 0;
-            for (Dragon dragon : DragonsCollection.dragons) {
+            for (Dragon dragon : DragonsCollection.getDragons()) {
                 if (dragon.getHead().getEyesCount() == eyesCount) {
                     countByHead += 1;
                 }

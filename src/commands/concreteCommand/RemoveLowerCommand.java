@@ -13,12 +13,12 @@ public class RemoveLowerCommand implements Command {
             long id = Long.parseLong(Executor.split[1]);
             int countOfDragons = 0;
 
-            if (DragonsCollection.dragons.size() != 0) {
-                for (Dragon dragon : DragonsCollection.dragons) {
+            if (DragonsCollection.getDragons().size() != 0) {
+                for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
-                        for (Dragon dragon1 : DragonsCollection.dragons) {
+                        for (Dragon dragon1 : DragonsCollection.getDragons()) {
                             if (dragon1.getAge() < dragon.getAge()) {
-                                DragonsCollection.dragons.remove(dragon1);
+                                DragonsCollection.getDragons().remove(dragon1);
                                 ++countOfDragons;
                             }
                         }
@@ -35,7 +35,7 @@ public class RemoveLowerCommand implements Command {
                 System.out.println("Коллекция пуста, заданного дракона не существует");
             }
         } else {
-            System.out.println("Неверная команда");
+            System.out.println("Неверная команда"); //TODO troubles
         }
     }
 }

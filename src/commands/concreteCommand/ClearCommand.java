@@ -8,7 +8,7 @@ public class ClearCommand implements Command {
     @Override
     public void execute() {
         if (Executor.split.length == 1) {
-            DragonsCollection.dragons.clear();
+            DragonsCollection.getDragons().clear();
             System.out.println("Коллекция очищена");
         } else {
             System.out.println("Неверная команда");

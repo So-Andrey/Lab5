@@ -8,8 +8,16 @@ import java.util.*;
 
 public class DragonsCollection {
 
-    public static LinkedHashSet<Dragon> dragons = new LinkedHashSet<>();
-    public static Date dateOfInitialization = new Date();
+    private static LinkedHashSet<Dragon> dragons = new LinkedHashSet<>();
+    private static Date dateOfInitialization = new Date();
+
+    public static LinkedHashSet<Dragon> getDragons() {
+        return dragons;
+    }
+
+    public static Date getDateOfInitialization() {
+        return dateOfInitialization;
+    }
 
     public static void putDragonsFromFile() throws FileNotFoundException {
 

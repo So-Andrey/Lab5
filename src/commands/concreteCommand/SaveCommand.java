@@ -14,7 +14,7 @@ public class SaveCommand implements Command {
 
         try (PrintWriter writer = new PrintWriter(Executor.file)) {
 
-            for (Dragon dragon : DragonsCollection.dragons) {
+            for (Dragon dragon : DragonsCollection.getDragons()) {
                 writer.write(dragon.getName() + ", " + dragon.getAge() + ", " + dragon.getCoordinates().getX() + ", " + dragon.getCoordinates().getY() + ", " + dragon.getColor() + ", " + dragon.getType() + ", " + dragon.getCharacter() + ", " + dragon.getHead().getEyesCount() + "\n");
             }
             System.out.println("Коллекция успешно сохранена в файл");

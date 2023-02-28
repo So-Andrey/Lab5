@@ -11,13 +11,13 @@ public class ShowCommand implements Command {
 
         if (Executor.split.length == 1) {
 
-            if (DragonsCollection.dragons.size() == 0) {
+            if (DragonsCollection.getDragons().size() == 0) {
 
                 System.out.println("Коллекция пуста");
 
             } else {
 
-                for (Dragon dragon : DragonsCollection.dragons) {
+                for (Dragon dragon : DragonsCollection.getDragons()) {
                     System.out.println("Дракон " + dragon.getId() + "\n" +
                             "Имя: " + dragon.getName() + "\n" +
                             "Возраст: " + dragon.getAge() + "\n" +

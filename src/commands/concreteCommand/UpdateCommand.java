@@ -14,8 +14,8 @@ public class UpdateCommand implements Command {
 
             long id = Long.parseLong(Executor.split[1]);
 
-            if (DragonsCollection.dragons.size() != 0) {
-                for (Dragon dragon : DragonsCollection.dragons) {
+            if (DragonsCollection.getDragons().size() != 0) {
+                for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
 
                         Scanner scanner = new Scanner(System.in);

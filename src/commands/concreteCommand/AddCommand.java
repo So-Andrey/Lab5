@@ -122,7 +122,7 @@ public class AddCommand implements Command {
                         i=9;
                     }
                     DragonHead dragonHead = new DragonHead(eyesCount);
-                    DragonsCollection.dragons.add(new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead));
+                    DragonsCollection.getDragons().add(new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead));
                     System.out.println("Новый элемент коллекции добавлен");
                     i=0;
                 } catch (InputMismatchException inputMismatchException) {

@@ -9,12 +9,12 @@ public class InfoCommand implements Command {
     public void execute() {
 
         if (Executor.split.length == 1) {
-            String type = DragonsCollection.dragons.getClass().getTypeName();
+            String type = DragonsCollection.getDragons().getClass().getTypeName();
             String[] typeArray = type.split(".util.");
             type = typeArray[1];
             System.out.println("Тип коллекции: " + type + "\n" +
-                    "Дата инициализации: " + DragonsCollection.dateOfInitialization + "\n" +
-                    "Количество элементов: " + DragonsCollection.dragons.size());
+                    "Дата инициализации: " + DragonsCollection.getDateOfInitialization() + "\n" +
+                    "Количество элементов: " + DragonsCollection.getDragons().size());
         } else {
             System.out.println("Неверная команда");
         }

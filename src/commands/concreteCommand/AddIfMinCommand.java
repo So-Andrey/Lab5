@@ -14,7 +14,7 @@ public class AddIfMinCommand implements Command {
     @Override
     public void execute() {
         if (Executor.split.length == 1) {
-            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.dragons);
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             int i = 1;
             Scanner sc = new Scanner(System.in);
             String name = "k";
@@ -126,12 +126,12 @@ public class AddIfMinCommand implements Command {
                     DragonHead dragonHead = new DragonHead(eyesCount);
                     Dragon dragon = new Dragon(name, coordinates, age, dragonColor, dragonType, dragonCharacter, dragonHead);
                     if (dragons.size() == 0) {
-                        DragonsCollection.dragons.add(dragon);
+                        DragonsCollection.getDragons().add(dragon);
                         System.out.println("Новый элемент добавлен");
                     } else {
                         Collections.sort(dragons);
                         if (dragon.getAge() < dragons.get(0).getAge()) {
-                            DragonsCollection.dragons.add(dragon);
+                            DragonsCollection.getDragons().add(dragon);
                             System.out.println("Новый элемент добавлен");
                         } else {
                             System.out.println("Элемент не добавлен. Возраст дракона слишком большой.");

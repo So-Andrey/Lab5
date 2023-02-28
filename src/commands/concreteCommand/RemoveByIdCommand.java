@@ -13,10 +13,10 @@ public class RemoveByIdCommand implements Command {
 
             long id = Long.parseLong(Executor.split[1]);
 
-            if (DragonsCollection.dragons.size() != 0) {
-                for (Dragon dragon : DragonsCollection.dragons) {
+            if (DragonsCollection.getDragons().size() != 0) {
+                for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
-                        DragonsCollection.dragons.remove(dragon);
+                        DragonsCollection.getDragons().remove(dragon);
                         System.out.println("Дракон успешно удалён");
                     } else {
                         System.out.println("Такого дракона не существует");
