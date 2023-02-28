@@ -4,6 +4,8 @@ import allForDragons.*;
 import commands.Command;
 import commands.Executor;
 
+import java.util.ConcurrentModificationException;
+
 public class RemoveLowerCommand implements Command {
     @Override
     public void execute() {
@@ -12,30 +14,38 @@ public class RemoveLowerCommand implements Command {
 
             long id = Long.parseLong(Executor.split[1]);
             int countOfDragons = 0;
+            boolean dragonExist = false;
 
-            if (DragonsCollection.getDragons().size() != 0) {
+            if (!DragonsCollection.getDragons().isEmpty()) {
+                long age = 0;
                 for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
-                        for (Dragon dragon1 : DragonsCollection.getDragons()) {
-                            if (dragon1.getAge() < dragon.getAge()) {
-                                DragonsCollection.getDragons().remove(dragon1);
+                        dragonExist = true;
+                        age = dragon.getAge();
+                    }
+                }
+                if (dragonExist) {
+                    try {
+                        for (Dragon dragon : DragonsCollection.getDragons()) {
+                            if (dragon.getAge() < age) {
+                                DragonsCollection.getDragons().remove(dragon);
                                 ++countOfDragons;
                             }
                         }
-                    } else {
-                        System.out.println("Заданного дракона не существует");
-                    }
-                    if (countOfDragons != 0) {
-                        System.out.println("Успешно удалено " + countOfDragons + " драконов");
-                    } else {
-                        System.out.println("Драконов младше заданного не существует");
-                    }
+                    } catch (ConcurrentModificationException ignored) {} //TODO исключение + удаляет на один меньше чем надо
+                } else {
+                    System.out.println("Заданного дракона не существует");
+                }
+                if (countOfDragons != 0) {
+                    System.out.println("Количество удалённых драконов " + countOfDragons);
+                } else {
+                    System.out.println("Драконов младше заданного не существует");
                 }
             } else {
                 System.out.println("Коллекция пуста, заданного дракона не существует");
             }
         } else {
-            System.out.println("Неверная команда"); //TODO troubles
+            System.out.println("Неверная 66 команда");
         }
     }
 }

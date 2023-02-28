@@ -50,26 +50,19 @@ public class Executor {
                     commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
                     while (programRunning == 1) {
-
-                        boolean ifWrongCombination = false;
                         try {
                             try {
                                 split = scanner.nextLine().split(" ");
                             } catch (Exception ignored) {
+                                System.out.println("Неверный ввод, перезапустите программу");
                                 programRunning = 0;
-                                ifWrongCombination = true;
                             }
                             Command command = commandHashMap.get(split[0]);
                             command.execute();
                         } catch (Exception exception) {
-                            if (ifWrongCombination) {
-                                programRunning = 0;
-                                System.out.println("Неверный ввод, перезапустите программу");
-                            } else {
-                                System.out.println("Неверная команда");
+                            System.out.println("Неверная команда"); //TODO сомнительно
                             }
                         }
-                    }
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }

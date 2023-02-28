@@ -12,20 +12,22 @@ public class RemoveByIdCommand implements Command {
         if (Executor.split.length == 2) {
 
             long id = Long.parseLong(Executor.split[1]);
+            boolean dragonExist = false;
 
-            if (DragonsCollection.getDragons().size() != 0) {
+            if (!DragonsCollection.getDragons().isEmpty()) {
                 for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
                         DragonsCollection.getDragons().remove(dragon);
                         System.out.println("Дракон успешно удалён");
-                    } else {
-                        System.out.println("Такого дракона не существует");
+                        dragonExist = true;
                     }
                 }
+                if (!dragonExist) {
+                    System.out.println("Такого дракона не существует");
+                }
             } else {
-                System.out.println("Такого дракона не существует");
+                System.out.println("Коллекция пуста, такого дракона не существует");
             }
-
         } else {
             System.out.println("Неверная команда");
         }

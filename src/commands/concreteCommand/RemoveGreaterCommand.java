@@ -8,7 +8,7 @@ public class RemoveGreaterCommand implements Command {
     @Override
     public void execute() {
 
-
+        //TODO осталась эта команда
 
     }
 }

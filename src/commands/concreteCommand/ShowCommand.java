@@ -11,7 +11,7 @@ public class ShowCommand implements Command {
 
         if (Executor.split.length == 1) {
 
-            if (DragonsCollection.getDragons().size() == 0) {
+            if (DragonsCollection.getDragons().isEmpty()) {
 
                 System.out.println("Коллекция пуста");
 
