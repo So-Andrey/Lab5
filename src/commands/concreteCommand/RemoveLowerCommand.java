@@ -32,7 +32,7 @@ public class RemoveLowerCommand implements Command {
                                 ++countOfDragons;
                             }
                         }
-                    } catch (ConcurrentModificationException ignored) {} //TODO исключение + удаляет на один меньше чем надо
+                    } catch (ConcurrentModificationException ignored) {} //TODO исключение + удаляет на один меньше чем надо решил - компаратор
                 } else {
                     System.out.println("Заданного дракона не существует");
                 }
@@ -45,7 +45,7 @@ public class RemoveLowerCommand implements Command {
                 System.out.println("Коллекция пуста, заданного дракона не существует");
             }
         } else {
-            System.out.println("Неверная 66 команда");
+            System.out.println("Неверная команда");
         }
     }
 }

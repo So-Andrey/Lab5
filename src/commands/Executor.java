@@ -60,9 +60,9 @@ public class Executor {
                             Command command = commandHashMap.get(split[0]);
                             command.execute();
                         } catch (Exception exception) {
-                            System.out.println("Неверная команда"); //TODO сомнительно
-                            }
+                            System.out.println("Неверная команда");
                         }
+                    }
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }
