@@ -4,7 +4,8 @@ import allForDragons.*;
 import commands.Command;
 import commands.Executor;
 
-import java.util.ConcurrentModificationException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class RemoveLowerCommand implements Command {
     @Override
@@ -14,31 +15,35 @@ public class RemoveLowerCommand implements Command {
 
             long id = Long.parseLong(Executor.split[1]);
             int countOfDragons = 0;
-            boolean dragonExist = false;
+            boolean dragonExists = false;
+            Dragon thisDragon = new Dragon("", new Coordinates(0,0), Long.parseLong("0"),Color.ORANGE, DragonType.WATER, DragonCharacter.FICKLE,new DragonHead(Double.parseDouble("0")));
 
             if (!DragonsCollection.getDragons().isEmpty()) {
-                long age = 0;
                 for (Dragon dragon : DragonsCollection.getDragons()) {
                     if (dragon.getId() == id) {
-                        dragonExist = true;
-                        age = dragon.getAge();
+                        dragonExists = true;
+                        thisDragon = dragon;
                     }
                 }
-                if (dragonExist) {
-                    try {
-                        for (Dragon dragon : DragonsCollection.getDragons()) {
-                            if (dragon.getAge() < age) {
-                                DragonsCollection.getDragons().remove(dragon);
-                                ++countOfDragons;
-                            }
+                if (dragonExists) {
+                    boolean isThereYoungerDragons = true;
+                    do {
+                        ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
+                        AgeComparator ageComparator = new AgeComparator();
+                        Dragon dragon = Collections.min(dragons, ageComparator);
+                        if (dragon != thisDragon) {
+                            DragonsCollection.getDragons().remove(dragon);
+                            ++countOfDragons;
+                        } else {
+                            isThereYoungerDragons = false;
                         }
-                    } catch (ConcurrentModificationException ignored) {} //TODO исключение + удаляет на один меньше чем надо решил - компаратор
+                    } while (isThereYoungerDragons);
                 } else {
                     System.out.println("Заданного дракона не существует");
                 }
                 if (countOfDragons != 0) {
                     System.out.println("Количество удалённых драконов " + countOfDragons);
-                } else {
+                } else if (dragonExists) {
                     System.out.println("Драконов младше заданного не существует");
                 }
             } else {
