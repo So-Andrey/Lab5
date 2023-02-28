@@ -64,7 +64,7 @@ public class Executor {
                         } catch (Exception exception) {
                             if (ifWrongCombination) {
                                 programRunning = 0;
-                                System.out.println("Неверный ввод");
+                                System.out.println("Неверный ввод, перезапустите программу");
                             } else {
                                 System.out.println("Неверная команда");
                             }
