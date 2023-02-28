@@ -18,9 +18,9 @@ public class DragonsCollection {
         long x;
         float y;
         Long age;
-        Color color = null;
-        DragonType type = DragonType.FIRE;
-        DragonCharacter character = DragonCharacter.WISE;
+        Color color;
+        DragonType type;
+        DragonCharacter character;
         Double eyesCount;
 
         boolean scan = true;
@@ -39,23 +39,9 @@ public class DragonsCollection {
                         x = Long.parseLong(dragon[2]);
                         y = Float.parseFloat(dragon[3]);
                         if (dragon[4].equals("GREEN") || dragon[4].equals("ORANGE") || dragon[4].equals("BROWN") || dragon[4].equals("null") | dragon[5].equals("WATER") || dragon[5].equals("UNDERGROUND") || dragon[5].equals("FIRE") || dragon[6].equals("CUNNING") || dragon[6].equals("CHAOTIC_EVIL") || dragon[6].equals("WISE") || dragon[6].equals("FICKLE")) {
-                            switch (dragon[4]) {
-                                case "GREEN" -> color = Color.GREEN;
-                                case "ORANGE" -> color = Color.ORANGE;
-                                case "BROWN" -> color = Color.BROWN;
-                                case "null" -> color = null;
-                            }
-                            switch (dragon[5]) {
-                                case "WATER" -> type = DragonType.WATER;
-                                case "UNDERGROUND" -> type = DragonType.UNDERGROUND;
-                                case "FIRE" -> type = DragonType.FIRE;
-                            }
-                            switch (dragon[6]) {
-                                case "CUNNING" -> character = DragonCharacter.CUNNING;
-                                case "WISE" -> character = DragonCharacter.WISE;
-                                case "CHAOTIC_EVIL" -> character = DragonCharacter.CHAOTIC_EVIL;
-                                case "FICKLE" -> character = DragonCharacter.FICKLE;
-                            }
+                            color = Color.valueOf(dragon[4]);
+                            type = DragonType.valueOf(dragon[5]);
+                            character = DragonCharacter.valueOf(dragon[6]);
                         } else {
                             throw new InputMismatchException();
                         }

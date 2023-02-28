@@ -20,21 +20,22 @@ public class RemoveLowerCommand implements Command {
                             if (dragon1.getAge() < dragon.getAge()) {
                                 DragonsCollection.dragons.remove(dragon1);
                                 ++countOfDragons;
-                            } else {
-                                if (countOfDragons != 0) {
-                                    System.out.println("Успешно удалено " + countOfDragons + " драконов");
-                                } else {
-                                    System.out.println("Таких драконов не существует");
-                                }
                             }
                         }
                     } else {
                         System.out.println("Заданного дракона не существует");
                     }
+                    if (countOfDragons != 0) {
+                        System.out.println("Успешно удалено " + countOfDragons + " драконов");
+                    } else {
+                        System.out.println("Драконов младше заданного не существует");
+                    }
                 }
             } else {
-                System.out.println("Неверная команда");
+                System.out.println("Коллекция пуста, заданного дракона не существует");
             }
+        } else {
+            System.out.println("Неверная команда");
         }
     }
 }
