@@ -50,12 +50,24 @@ public class Executor {
                     commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
                     while (programRunning == 1) {
+
+                        boolean ifWrongCombination = false;
                         try {
-                            split = scanner.nextLine().split(" ");
+                            try {
+                                split = scanner.nextLine().split(" ");
+                            } catch (Exception ignored) {
+                                programRunning = 0;
+                                ifWrongCombination = true;
+                            }
                             Command command = commandHashMap.get(split[0]);
                             command.execute();
                         } catch (Exception exception) {
-                            System.out.println("Неверная команда"); //TODO control+D
+                            if (ifWrongCombination) {
+                                programRunning = 0;
+                                System.out.println("Неверный ввод");
+                            } else {
+                                System.out.println("Неверная команда");
+                            }
                         }
                     }
                 } else {
