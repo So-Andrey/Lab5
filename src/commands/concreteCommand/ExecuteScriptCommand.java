@@ -40,7 +40,7 @@ public class ExecuteScriptCommand implements Command {
                     while (scan) { //TODO работает криво
                         try {
                             Executor.split = scanner.nextLine().split(" ");
-                            if (!(Executor.split[0].equals("execute_script") & Executor.split[1].equals(file))) {
+                            if (!(Executor.split[0].equals("execute_script") & Executor.split[1].equals(file))) { //TODO это не чекает когда один и тот же файл задан сначала именем а потом путем
                                 Command command = commandHashMap.get(Executor.split[0]);
                                 command.execute();
                             }
