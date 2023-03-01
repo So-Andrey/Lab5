@@ -3,7 +3,6 @@ package commands.concreteCommand;
 import allForDragons.*;
 import commands.Command;
 import commands.Executor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,8 +28,8 @@ public class RemoveGreaterCommand implements Command {
                     boolean isThereOlderDragons = true;
                     do {
                         ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
-                        AgeComparator ageComparator = new AgeComparator();
-                        Dragon dragon = Collections.max(dragons, ageComparator);
+                        Collections.sort(dragons);
+                        Dragon dragon = Collections.max(dragons);
                         if (dragon != thisDragon) {
                             DragonsCollection.getDragons().remove(dragon);
                             ++countOfDragons;
@@ -52,6 +51,5 @@ public class RemoveGreaterCommand implements Command {
         } else {
             System.out.println("Неверная команда");
         }
-
     }
 }
