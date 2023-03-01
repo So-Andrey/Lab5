@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
+
     @Override
     public void execute() {
 
@@ -36,14 +37,19 @@ public class ExecuteScriptCommand implements Command {
 
                     Scanner scanner = new Scanner(new File(file));
                     boolean scan = true;
-                    while (scan) {
+                    while (scan) { //TODO работает криво
                         try {
                             Executor.split = scanner.nextLine().split(" ");
-                            Command command = commandHashMap.get(Executor.split[0]);
-                            command.execute();
+                            if (!(Executor.split[0].equals("execute_script") & Executor.split[1].equals(file))) {
+                                Command command = commandHashMap.get(Executor.split[0]);
+                                command.execute();
+                            }
                             scan = scanner.hasNext();
-                        } catch (Exception ignored) {}
+                        } catch (Exception ignored) {
+                            scan = scanner.hasNext();
+                        }
                     }
+                    scanner.close();
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }
