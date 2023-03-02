@@ -57,8 +57,7 @@ public class Executor {
                                 System.out.println("Неверный ввод, перезапустите программу");
                                 programRunning = 0;
                             }
-                            Command command = commandHashMap.get(split[0]);
-                            command.execute();
+                            commandHashMap.get(split[0]).execute();
                         } catch (Exception exception) {
                             System.out.println("Неверная команда");
                         }

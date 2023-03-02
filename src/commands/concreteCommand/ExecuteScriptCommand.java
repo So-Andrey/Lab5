@@ -41,15 +41,14 @@ public class ExecuteScriptCommand implements Command {
                         try {
                             Executor.split = scanner.nextLine().split(" ");
                             if (!(Executor.split[0].equals("execute_script") & Executor.split[1].equals(file))) { //TODO это не чекает когда один и тот же файл задан сначала именем а потом путем
-                                Command command = commandHashMap.get(Executor.split[0]);
-                                command.execute();
+                                commandHashMap.get(Executor.split[0]).execute();
                             }
-                            scan = scanner.hasNext();
                         } catch (Exception ignored) {
+
+                        } finally {
                             scan = scanner.hasNext();
                         }
                     }
-                    scanner.close();
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }

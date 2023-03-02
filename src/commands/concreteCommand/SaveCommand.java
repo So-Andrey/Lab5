@@ -17,6 +17,7 @@ public class SaveCommand implements Command {
             for (Dragon dragon : DragonsCollection.getDragons()) {
                 writer.write(dragon.getName() + ", " + dragon.getAge() + ", " + dragon.getCoordinates().getX() + ", " + dragon.getCoordinates().getY() + ", " + dragon.getColor() + ", " + dragon.getType() + ", " + dragon.getCharacter() + ", " + dragon.getHead().getEyesCount() + "\n");
             }
+            writer.flush();
             System.out.println("Коллекция успешно сохранена в файл");
 
         } catch (FileNotFoundException fileNotFoundException) {
