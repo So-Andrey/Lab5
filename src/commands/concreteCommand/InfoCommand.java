@@ -14,7 +14,7 @@ public class InfoCommand implements Command {
             type = typeArray[1];
             System.out.println("Тип коллекции: " + type + "\n" +
                     "Дата инициализации: " + DragonsCollection.getDateOfInitialization() + "\n" +
-                    "Количество элементов: " + DragonsCollection.getDragons().size());
+                    "Количество элементов: " + DragonsCollection.getDragons().size() + "\n");
         } else {
             System.out.println("Неверная команда");
         }

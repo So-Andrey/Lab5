@@ -37,12 +37,14 @@ public class ExecuteScriptCommand implements Command {
 
                     Scanner scanner = new Scanner(new File(file));
                     while (scanner.hasNext()) {
-                        try {
-                            Executor.split = scanner.nextLine().split(" ");
-                            if (!(Executor.split[0].equals("execute_script") & (new File(file).getAbsolutePath().equals(new File(Executor.split[1]).getAbsolutePath())))) {
+                        Executor.split = scanner.nextLine().split(" ");
+                        if (!(Executor.split.length == 2 & Executor.split[0].equals("execute_script"))) {
+                            commandHashMap.get(Executor.split[0]).execute();
+                        } else {
+                            if (!(new File(file).getAbsolutePath().equals(new File(Executor.split[1]).getAbsolutePath()))) {
                                 commandHashMap.get(Executor.split[0]).execute();
                             }
-                        } catch (Exception ignored) {}
+                        }
                     }
                 } else {
                     System.out.println("Нет доступа к файлу");
