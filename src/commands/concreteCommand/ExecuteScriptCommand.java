@@ -30,6 +30,7 @@ public class ExecuteScriptCommand implements Command {
                             }
                         } catch (NullPointerException ignored) {}
                     }
+                    scanner.close();
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }

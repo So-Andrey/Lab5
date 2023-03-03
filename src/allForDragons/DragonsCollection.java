@@ -60,6 +60,7 @@ public class DragonsCollection {
             } catch (Exception ignored) {}
             scan = scanner.hasNext();
         }
+        scanner.close();
         System.out.println("Из файла добавлено объектов в коллекцию: " + dragons.size());
     }
 }

@@ -167,6 +167,7 @@ public class UpdateCommand implements Command {
                                 dragon.setCoordinates(coordinates);
                             }
                         }
+                        scanner.close();
                         System.out.println("Параметр дракона успешно изменён");
                     } else {
                         System.out.println("Такого дракона не существует");
