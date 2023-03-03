@@ -11,13 +11,20 @@ import java.util.Collections;
 
 public class MaxByHeadCommand implements Command {
 
+    private void maxByHeadPrinter() {
+        ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
+        HeadComparator headComparator = new HeadComparator();
+        Dragon dragon = Collections.max(dragons, headComparator);
+        System.out.println(dragon);
+    }
     @Override
     public void execute() {
         if (Invoker.getSplit().length == 1) {
-            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
-            HeadComparator headComparator = new HeadComparator();
-            Dragon dragon = Collections.max(dragons, headComparator);
-            System.out.println(dragon);
+            if (DragonsCollection.getDragons().size() != 0) {
+                maxByHeadPrinter();
+            } else {
+                System.out.println("Коллекция пуста");
+            }
         } else {
             System.out.println("Неверная команда");
         }

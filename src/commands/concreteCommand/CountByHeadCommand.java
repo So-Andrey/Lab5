@@ -7,7 +7,7 @@ import commands.Invoker;
 
 public class CountByHeadCommand implements Command {
 
-    private int getCountOfDragons() {
+    private void getCountOfDragons() {
         double eyesCount = Double.parseDouble(Invoker.getSplit()[1]);
         int countByHead = 0;
         for (Dragon dragon : DragonsCollection.getDragons()) {
@@ -15,12 +15,16 @@ public class CountByHeadCommand implements Command {
                 countByHead += 1;
             }
         }
-        return countByHead;
+        System.out.println("Количество драконов с заданным количеством глаз: " + countByHead);
     }
     @Override
     public void execute() {
         if (Invoker.getSplit().length == 2) {
-            System.out.println("Количество драконов с заданным количеством глаз: " + getCountOfDragons());
+            if (DragonsCollection.getDragons().isEmpty()) {
+                System.out.println("Коллекция пуста");
+            } else {
+                getCountOfDragons();
+            }
         } else {
             System.out.println("Неверная команда");
         }

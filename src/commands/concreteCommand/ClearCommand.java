@@ -14,7 +14,6 @@ public class ClearCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
-
     @Override
     public String description() {
         return "clear : очистить коллекцию";
