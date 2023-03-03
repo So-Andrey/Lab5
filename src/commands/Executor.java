@@ -67,7 +67,7 @@ public class Executor {
                     System.out.println("Нет доступа к файлу");
                 }
             } else {
-                System.out.println("Неверно указано имя файла");
+                System.out.println("Неверное расширение файла");
             }
         } else {
             System.out.println("Неверно указано имя файла");
