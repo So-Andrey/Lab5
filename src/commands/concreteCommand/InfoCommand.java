@@ -7,14 +7,8 @@ import commands.Invoker;
 public class InfoCommand implements Command {
     @Override
     public void execute() {
-
-        if (Invoker.split.length == 1) {
-            String type = DragonsCollection.getDragons().getClass().getTypeName();
-            String[] typeArray = type.split(".util.");
-            type = typeArray[1];
-            System.out.println("Тип коллекции: " + type + "\n" +
-                    "Дата инициализации: " + DragonsCollection.getDateOfInitialization() + "\n" +
-                    "Количество элементов: " + DragonsCollection.getDragons().size() + "\n");
+        if (Invoker.getSplit().length == 1) {
+            DragonsCollection.getInfo();
         } else {
             System.out.println("Неверная команда");
         }

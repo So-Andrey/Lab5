@@ -11,19 +11,19 @@ public class ExecuteScriptCommand implements Command {
     @Override
     public void execute() {
 
-        if (Invoker.split.length == 2) {
-            String file = Invoker.split[1];
+        if (Invoker.getSplit().length == 2) {
+            String file = Invoker.getSplit()[1];
             try {
                 if (new File(file).exists() & new File(file).canRead()) {
                     Scanner scanner = new Scanner(new File(file));
                     while (scanner.hasNext()) {
-                        Invoker.split = scanner.nextLine().split(" ");
+                        Invoker.setSplit(scanner.nextLine().split(" "));
                         try {
-                            if (!(Invoker.split.length == 2 & Invoker.split[0].equals("execute_script"))) {
-                                Invoker.commandHashMap.get(Invoker.split[0]).execute();
+                            if (!(Invoker.getSplit().length == 2 & Invoker.getSplit()[0].equals("execute_script"))) {
+                                Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
                             } else {
-                                if (!(new File(file).getAbsolutePath().equals(new File(Invoker.split[1]).getAbsolutePath()))) {
-                                    Invoker.commandHashMap.get(Invoker.split[0]).execute();
+                                if (!(new File(file).getAbsolutePath().equals(new File(Invoker.getSplit()[1]).getAbsolutePath()))) {
+                                    Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
                                 } else {
                                     System.out.println("Неверная команда");
                                 }

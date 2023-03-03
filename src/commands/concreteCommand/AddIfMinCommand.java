@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class AddIfMinCommand implements Command {
     @Override
     public void execute() {
-        if (Invoker.split.length == 1) {
+        if (Invoker.getSplit().length == 1) {
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             int i = 1;
             Scanner sc = new Scanner(System.in);

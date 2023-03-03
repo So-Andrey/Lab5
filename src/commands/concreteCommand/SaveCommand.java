@@ -12,7 +12,7 @@ public class SaveCommand implements Command {
     @Override
     public void execute() {
 
-        try (PrintWriter writer = new PrintWriter(Invoker.file)) {
+        try (PrintWriter writer = new PrintWriter(Invoker.getFile())) {
 
             for (Dragon dragon : DragonsCollection.getDragons()) {
                 writer.write(dragon.getName() + ", " + dragon.getAge() + ", " + dragon.getCoordinates().getX() + ", " + dragon.getCoordinates().getY() + ", " + dragon.getColor() + ", " + dragon.getType() + ", " + dragon.getCharacter() + ", " + dragon.getHead().getEyesCount() + "\n");

@@ -11,14 +11,25 @@ import java.io.File;
 
 public class Invoker {
 
-    public static boolean programRunning = true;
-
-    public static String[] split;
-
-    public static String file;
-
-    public static final HashMap<String, Command> commandHashMap = new HashMap<>();
-
+    private static boolean programRunning = true;
+    private static String[] split;
+    private static String file;
+    private static final HashMap<String, Command> commandHashMap = new HashMap<>();
+    public static String[] getSplit() {
+        return split;
+    }
+    public static void setSplit(String[] split) {
+        Invoker.split = split;
+    }
+    public static String getFile() {
+        return file;
+    }
+    public static void setProgramRunning(boolean programRunning) {
+        Invoker.programRunning = programRunning;
+    }
+    public static HashMap<String, Command> getCommandHashMap() {
+        return commandHashMap;
+    }
     static {
         commandHashMap.put("help", new HelpCommand());
         commandHashMap.put("info", new InfoCommand());

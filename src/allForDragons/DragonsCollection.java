@@ -15,13 +15,15 @@ public class DragonsCollection {
         return dragons;
     }
 
-    public static Date getDateOfInitialization() {
-        return dateOfInitialization;
+    public static void getInfo() {
+        System.out.println("Тип коллекции: " + dragons.getClass().getTypeName().split(".util.")[1] + "\n" +
+                "Дата инициализации: " + dateOfInitialization + "\n" +
+                "Количество элементов: " + dragons.size() + "\n");
     }
 
     public static void putDragonsFromFile() throws FileNotFoundException {
 
-        Scanner scanner = new Scanner(new File(Invoker.file));
+        Scanner scanner = new Scanner(new File(Invoker.getFile()));
         String name;
         long x;
         float y;

@@ -106,6 +106,18 @@ public class Dragon implements Comparable<Dragon>{
         this.head = head;
     }
 
+    public void showDragon() {
+        System.out.println("Дракон " + id + "\n" +
+                "Имя: " + name + "\n" +
+                "Возраст: " + age + "\n" +
+                "Тип: " + type + "\n" +
+                "Цвет: " + color + "\n" +
+                "Характер: " + character + "\n" +
+                "Количество глаз: " + head.getEyesCount() + "\n" +
+                "Координаты: (" + coordinates.getX() + "; " + coordinates.getY() + ")\n" +
+                "Дата и время создания: " + creationDate + "\n");
+    }
+
     @Override
     public int compareTo(Dragon dragon) {
         int result = 0;

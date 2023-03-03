@@ -7,7 +7,7 @@ import commands.Invoker;
 public class ClearCommand implements Command {
     @Override
     public void execute() {
-        if (Invoker.split.length == 1) {
+        if (Invoker.getSplit().length == 1) {
             DragonsCollection.getDragons().clear();
             System.out.println("Коллекция очищена");
         } else {

@@ -12,7 +12,7 @@ public class AddCommand implements Command {
 
     @Override
     public void execute() throws InputMismatchException {
-        if (Invoker.split.length == 1) {
+        if (Invoker.getSplit().length == 1) {
             int i = 1;
             Scanner sc = new Scanner(System.in);
             String name = "k";

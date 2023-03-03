@@ -10,8 +10,8 @@ public class CountByHeadCommand implements Command {
     @Override
     public void execute() {
 
-        if (Invoker.split.length == 2) {
-            double eyesCount = Double.parseDouble(Invoker.split[1]);
+        if (Invoker.getSplit().length == 2) {
+            double eyesCount = Double.parseDouble(Invoker.getSplit()[1]);
             int countByHead = 0;
             for (Dragon dragon : DragonsCollection.getDragons()) {
                 if (dragon.getHead().getEyesCount() == eyesCount) {

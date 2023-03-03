@@ -10,9 +10,9 @@ public class UpdateCommand implements Command {
     @Override
     public void execute() {
 
-        if (Invoker.split.length == 2) {
+        if (Invoker.getSplit().length == 2) {
 
-            long id = Long.parseLong(Invoker.split[1]);
+            long id = Long.parseLong(Invoker.getSplit()[1]);
 
             if (!DragonsCollection.getDragons().isEmpty()) {
                 for (Dragon dragon : DragonsCollection.getDragons()) {
