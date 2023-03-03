@@ -17,15 +17,7 @@ public class MaxByHeadCommand implements Command {
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             HeadComparator headComparator = new HeadComparator();
             Dragon dragon = Collections.max(dragons, headComparator);
-            System.out.println("Дракон " + dragon.getId() + "\n" +
-                    "Имя: " + dragon.getName() + "\n" +
-                    "Возраст: " + dragon.getAge() + "\n" +
-                    "Тип: " + dragon.getType() + "\n" +
-                    "Цвет: " + dragon.getColor() + "\n" +
-                    "Характер: " + dragon.getCharacter() + "\n" +
-                    "Количество глаз: " + dragon.getHead().getEyesCount() + "\n" +
-                    "Координаты: (" + dragon.getCoordinates().getX() + "; " + dragon.getCoordinates().getY() + ")\n" +
-                    "Дата и время создания: " + dragon.getCreationDate() + "\n");
+            System.out.println(dragon);
         } else {
             System.out.println("Неверная команда");
         }

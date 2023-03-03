@@ -18,7 +18,7 @@ public class PrintAscendingCommand implements Command {
             } else {
                 Collections.sort(dragons);
                 for (Dragon dragon : dragons) {
-                    dragon.showDragon();
+                    System.out.println(dragon);
                 }
             }
         } else {

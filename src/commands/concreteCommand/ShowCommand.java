@@ -13,7 +13,7 @@ public class ShowCommand implements Command {
                 System.out.println("Коллекция пуста");
             } else {
                 for (Dragon dragon : DragonsCollection.getDragons()) {
-                    dragon.showDragon();
+                    System.out.println(dragon);
                 }
             }
         } else { System.out.println("Неверная команда"); }

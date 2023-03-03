@@ -54,10 +54,6 @@ public class Dragon implements Comparable<Dragon>{
         return coordinates;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
     public Long getAge() {
         return age;
     }
@@ -106,8 +102,9 @@ public class Dragon implements Comparable<Dragon>{
         this.head = head;
     }
 
-    public void showDragon() {
-        System.out.println("Дракон " + id + "\n" +
+    @Override
+    public String toString() {
+        return "Дракон " + id + "\n" +
                 "Имя: " + name + "\n" +
                 "Возраст: " + age + "\n" +
                 "Тип: " + type + "\n" +
@@ -115,7 +112,7 @@ public class Dragon implements Comparable<Dragon>{
                 "Характер: " + character + "\n" +
                 "Количество глаз: " + head.getEyesCount() + "\n" +
                 "Координаты: (" + coordinates.getX() + "; " + coordinates.getY() + ")\n" +
-                "Дата и время создания: " + creationDate + "\n");
+                "Дата и время создания: " + creationDate + "\n";
     }
 
     @Override
