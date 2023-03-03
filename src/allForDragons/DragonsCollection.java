@@ -8,8 +8,8 @@ import java.util.*;
 
 public class DragonsCollection {
 
-    private static LinkedHashSet<Dragon> dragons = new LinkedHashSet<>();
-    private static Date dateOfInitialization = new Date();
+    private static final LinkedHashSet<Dragon> dragons = new LinkedHashSet<>();
+    private static final Date dateOfInitialization = new Date();
 
     public static LinkedHashSet<Dragon> getDragons() {
         return dragons;
