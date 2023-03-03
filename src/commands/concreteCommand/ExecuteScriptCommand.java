@@ -36,18 +36,13 @@ public class ExecuteScriptCommand implements Command {
                     commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
                     Scanner scanner = new Scanner(new File(file));
-                    boolean scan = true;
-                    while (scan) { //TODO работает криво
+                    while (scanner.hasNext()) {
                         try {
                             Executor.split = scanner.nextLine().split(" ");
-                            if (!(Executor.split[0].equals("execute_script") & Executor.split[1].equals(file))) { //TODO это не чекает когда один и тот же файл задан сначала именем а потом путем
+                            if (!(Executor.split[0].equals("execute_script") & (new File(file).getAbsolutePath().equals(new File(Executor.split[1]).getAbsolutePath())))) {
                                 commandHashMap.get(Executor.split[0]).execute();
                             }
-                        } catch (Exception ignored) {
-
-                        } finally {
-                            scan = scanner.hasNext();
-                        }
+                        } catch (Exception ignored) {}
                     }
                 } else {
                     System.out.println("Нет доступа к файлу");

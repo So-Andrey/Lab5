@@ -5,6 +5,7 @@ import commands.concreteCommand.*;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.File;
 
@@ -53,13 +54,13 @@ public class Executor {
                         try {
                             try {
                                 split = scanner.nextLine().split(" ");
-                            } catch (Exception ignored) {
+                            } catch (NoSuchElementException noSuchElementException) {
                                 System.out.println("Неверный ввод, перезапустите программу");
                                 programRunning = 0;
                             }
                             commandHashMap.get(split[0]).execute();
-                        } catch (Exception exception) {
-                            System.out.println("Неверная команда");
+                        } catch (NullPointerException nullPointerException) {
+                            if (programRunning !=0) { System.out.println("Неверная команда"); }
                         }
                     }
                 } else {
