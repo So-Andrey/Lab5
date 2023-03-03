@@ -8,7 +8,7 @@ public class ExitCommand implements Command {
     @Override
     public void execute() {
         if (Invoker.split.length == 1) {
-            Invoker.programRunning = 0;
+            Invoker.programRunning = false;
         } else {
             System.out.println("Неверная команда");
         }

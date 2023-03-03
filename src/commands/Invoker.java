@@ -11,7 +11,7 @@ import java.io.File;
 
 public class Invoker {
 
-    public static int programRunning = 1;
+    public static boolean programRunning = true;
 
     public static String[] split;
 
@@ -50,17 +50,17 @@ public class Invoker {
                     commandHashMap.put("count_by_head", new CountByHeadCommand());
                     commandHashMap.put("print_ascending", new PrintAscendingCommand());
 
-                    while (programRunning == 1) {
+                    while (programRunning) {
                         try {
                             try {
                                 split = scanner.nextLine().split(" ");
                             } catch (NoSuchElementException noSuchElementException) {
                                 System.out.println("Неверный ввод, перезапустите программу");
-                                programRunning = 0;
+                                programRunning = false;
                             }
                             commandHashMap.get(split[0]).execute();
                         } catch (NullPointerException nullPointerException) {
-                            if (programRunning !=0) { System.out.println("Неверная команда"); }
+                            if (programRunning) { System.out.println("Неверная команда"); }
                         }
                     }
                 } else {
