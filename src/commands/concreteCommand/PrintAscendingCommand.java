@@ -36,5 +36,10 @@ public class PrintAscendingCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "print_ascending : вывести элементы коллекции в порядке возрастания";
+    }
 }
 

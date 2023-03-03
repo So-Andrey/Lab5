@@ -52,4 +52,9 @@ public class RemoveLowerCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный";
+    }
 }

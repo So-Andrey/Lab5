@@ -52,4 +52,9 @@ public class RemoveGreaterCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный";
+    }
 }

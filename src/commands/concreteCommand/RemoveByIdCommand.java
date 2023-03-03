@@ -32,4 +32,9 @@ public class RemoveByIdCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "remove_by_id id : удалить элемент из коллекции по его id";
+    }
 }

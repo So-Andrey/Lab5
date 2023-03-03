@@ -34,4 +34,9 @@ public class ShowCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
+    }
 }

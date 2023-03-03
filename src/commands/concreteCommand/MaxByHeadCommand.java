@@ -30,4 +30,9 @@ public class MaxByHeadCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "max_by_head : вывести любой объект из коллекции, значение поля head которого является максимальным";
+    }
 }

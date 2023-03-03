@@ -179,4 +179,9 @@ public class UpdateCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "update id : обновить значение элемента коллекции, id которого равен заданному";
+    }
 }

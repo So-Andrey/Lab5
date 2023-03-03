@@ -24,4 +24,9 @@ public class SaveCommand implements Command {
             System.out.println("Отсутствует имя файла");
         }
     }
+
+    @Override
+    public String description() {
+        return "save : сохранить коллекцию в файл";
+    }
 }

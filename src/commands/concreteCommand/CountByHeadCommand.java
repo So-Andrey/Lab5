@@ -24,4 +24,9 @@ public class CountByHeadCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "count_by_head head : вывести количество элементов, значение поля head которых равно заданному";
+    }
 }

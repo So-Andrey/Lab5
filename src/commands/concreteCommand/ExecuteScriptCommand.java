@@ -4,7 +4,6 @@ import commands.Command;
 import commands.Invoker;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
@@ -16,34 +15,15 @@ public class ExecuteScriptCommand implements Command {
             String file = Invoker.split[1];
             try {
                 if (new File(file).exists() & new File(file).canRead()) {
-
-                    HashMap<String, Command> commandHashMap = new HashMap<>();
-                    commandHashMap.put("help", new HelpCommand());
-                    commandHashMap.put("info", new InfoCommand());
-                    commandHashMap.put("show", new ShowCommand());
-                    commandHashMap.put("add", new AddCommand());
-                    commandHashMap.put("update", new UpdateCommand());
-                    commandHashMap.put("remove_by_id", new RemoveByIdCommand());
-                    commandHashMap.put("clear", new ClearCommand());
-                    commandHashMap.put("save", new SaveCommand());
-                    commandHashMap.put("execute_script", new ExecuteScriptCommand());
-                    commandHashMap.put("exit", new ExitCommand());
-                    commandHashMap.put("add_if_min", new AddIfMinCommand());
-                    commandHashMap.put("remove_greater", new RemoveGreaterCommand());
-                    commandHashMap.put("remove_lower", new RemoveLowerCommand());
-                    commandHashMap.put("max_by_head", new MaxByHeadCommand());
-                    commandHashMap.put("count_by_head", new CountByHeadCommand());
-                    commandHashMap.put("print_ascending", new PrintAscendingCommand());
-
                     Scanner scanner = new Scanner(new File(file));
                     while (scanner.hasNext()) {
                         Invoker.split = scanner.nextLine().split(" ");
                         try {
                             if (!(Invoker.split.length == 2 & Invoker.split[0].equals("execute_script"))) {
-                                commandHashMap.get(Invoker.split[0]).execute();
+                                Invoker.commandHashMap.get(Invoker.split[0]).execute();
                             } else {
                                 if (!(new File(file).getAbsolutePath().equals(new File(Invoker.split[1]).getAbsolutePath()))) {
-                                    commandHashMap.get(Invoker.split[0]).execute();
+                                    Invoker.commandHashMap.get(Invoker.split[0]).execute();
                                 } else {
                                     System.out.println("Неверная команда");
                                 }
@@ -59,5 +39,10 @@ public class ExecuteScriptCommand implements Command {
         } else {
             System.out.println("Неверная команда");
         }
+    }
+
+    @Override
+    public String description() {
+        return "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит";
     }
 }

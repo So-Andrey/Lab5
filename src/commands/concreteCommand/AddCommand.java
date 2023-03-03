@@ -133,4 +133,9 @@ public class AddCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "add {element} : добавить новый элемент в коллекцию";
+    }
 }

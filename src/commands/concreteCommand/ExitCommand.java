@@ -13,4 +13,9 @@ public class ExitCommand implements Command {
             System.out.println("Неверная команда");
         }
     }
+
+    @Override
+    public String description() {
+        return "exit : завершить программу (без сохранения в файл)";
+    }
 }
