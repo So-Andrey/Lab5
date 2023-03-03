@@ -2,7 +2,7 @@ package commands.concreteCommand;
 
 import allForDragons.*;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 import exceptions.IllegalValueOfXException;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class AddIfMinCommand implements Command {
     @Override
     public void execute() {
-        if (Executor.split.length == 1) {
+        if (Invoker.split.length == 1) {
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             int i = 1;
             Scanner sc = new Scanner(System.in);
@@ -21,10 +21,10 @@ public class AddIfMinCommand implements Command {
             long x = 0;
             float y = 0;
             Color dragonColor = null;
-            Long age = Long.parseLong("0");
+            long age = Long.parseLong("0");
             DragonType dragonType = DragonType.WATER;
             DragonCharacter dragonCharacter = DragonCharacter.FICKLE;
-            Double eyesCount = Double.parseDouble("0");
+            double eyesCount = Double.parseDouble("0");
             while (i != 0) {
                 try {
                     while (i == 1) {
@@ -69,7 +69,7 @@ public class AddIfMinCommand implements Command {
                         if (!s.matches("([-+]?\\d+)")) {
                             throw new InputMismatchException();
                         }
-                        age = Long.valueOf(s);
+                        age = Long.parseLong(s);
                         i = 5;
                     }
                     while (i == 5) {
@@ -120,7 +120,7 @@ public class AddIfMinCommand implements Command {
                         } catch (NumberFormatException ex) {
                             throw new InputMismatchException();
                         }
-                        eyesCount = Double.valueOf(s);
+                        eyesCount = Double.parseDouble(s);
                         i = 9;
                     }
                     DragonHead dragonHead = new DragonHead(eyesCount);

@@ -4,7 +4,7 @@ import allForDragons.Dragon;
 import allForDragons.DragonsCollection;
 import allForDragons.HeadComparator;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,7 @@ public class MaxByHeadCommand implements Command {
 
     @Override
     public void execute() {
-        if (Executor.split.length == 1) {
+        if (Invoker.split.length == 1) {
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             HeadComparator headComparator = new HeadComparator();
             Dragon dragon = Collections.max(dragons, headComparator);

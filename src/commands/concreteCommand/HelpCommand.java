@@ -1,14 +1,14 @@
 package commands.concreteCommand;
 
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 
 public class HelpCommand implements Command {
 
     @Override
     public void execute() {
 
-        if (Executor.split.length == 1) {
+        if (Invoker.split.length == 1) {
 
             System.out.println("""
                     help : вывести справку по доступным командам

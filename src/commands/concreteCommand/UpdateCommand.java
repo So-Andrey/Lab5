@@ -2,7 +2,7 @@ package commands.concreteCommand;
 
 import allForDragons.*;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 import exceptions.IllegalValueOfXException;
 import java.util.Scanner;
 
@@ -10,9 +10,9 @@ public class UpdateCommand implements Command {
     @Override
     public void execute() {
 
-        if (Executor.split.length == 2) {
+        if (Invoker.split.length == 2) {
 
-            long id = Long.parseLong(Executor.split[1]);
+            long id = Long.parseLong(Invoker.split[1]);
 
             if (!DragonsCollection.getDragons().isEmpty()) {
                 for (Dragon dragon : DragonsCollection.getDragons()) {

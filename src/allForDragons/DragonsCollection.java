@@ -1,6 +1,6 @@
 package allForDragons;
 
-import commands.Executor;
+import commands.Invoker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,15 +21,15 @@ public class DragonsCollection {
 
     public static void putDragonsFromFile() throws FileNotFoundException {
 
-        Scanner scanner = new Scanner(new File(Executor.file));
+        Scanner scanner = new Scanner(new File(Invoker.file));
         String name;
         long x;
         float y;
-        Long age;
+        long age;
         Color color;
         DragonType type;
         DragonCharacter character;
-        Double eyesCount;
+        double eyesCount;
 
         boolean scan = true;
         while (scan) {

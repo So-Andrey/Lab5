@@ -2,7 +2,7 @@ package commands.concreteCommand;
 
 import allForDragons.*;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -10,9 +10,9 @@ public class RemoveGreaterCommand implements Command {
     @Override
     public void execute() {
 
-        if (Executor.split.length == 2) {
+        if (Invoker.split.length == 2) {
 
-            long id = Long.parseLong(Executor.split[1]);
+            long id = Long.parseLong(Invoker.split[1]);
             int countOfDragons = 0;
             boolean dragonExists = false;
             Dragon thisDragon = new Dragon("", new Coordinates(0,0), Long.parseLong("0"),Color.ORANGE, DragonType.WATER, DragonCharacter.FICKLE,new DragonHead(Double.parseDouble("0")));

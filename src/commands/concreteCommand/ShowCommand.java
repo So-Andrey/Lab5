@@ -2,14 +2,14 @@ package commands.concreteCommand;
 
 import commands.Command;
 import allForDragons.*;
-import commands.Executor;
+import commands.Invoker;
 
 public class ShowCommand implements Command {
 
     @Override
     public void execute() {
 
-        if (Executor.split.length == 1) {
+        if (Invoker.split.length == 1) {
 
             if (DragonsCollection.getDragons().isEmpty()) {
 

@@ -3,7 +3,7 @@ package commands.concreteCommand;
 import allForDragons.Dragon;
 import allForDragons.DragonsCollection;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import java.util.Collections;
 public class PrintAscendingCommand implements Command {
     @Override
     public void execute() {
-        if (Executor.split.length == 1) {
+        if (Invoker.split.length == 1) {
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             if (dragons.size() == 0) {
 

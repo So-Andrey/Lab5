@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.File;
 
-public class Executor {
+public class Invoker {
 
     public static int programRunning = 1;
 
@@ -17,7 +17,7 @@ public class Executor {
 
     public static String file;
 
-    public static void executor(String[] args) throws FileNotFoundException {
+    public static void invoker(String[] args) throws FileNotFoundException {
 
         if (args.length == 1) {
 

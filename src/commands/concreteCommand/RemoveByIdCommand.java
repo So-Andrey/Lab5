@@ -3,15 +3,15 @@ package commands.concreteCommand;
 import allForDragons.Dragon;
 import allForDragons.DragonsCollection;
 import commands.Command;
-import commands.Executor;
+import commands.Invoker;
 
 public class RemoveByIdCommand implements Command {
     @Override
     public void execute() {
 
-        if (Executor.split.length == 2) {
+        if (Invoker.split.length == 2) {
 
-            long id = Long.parseLong(Executor.split[1]);
+            long id = Long.parseLong(Invoker.split[1]);
             boolean dragonExist = false;
 
             if (!DragonsCollection.getDragons().isEmpty()) {
