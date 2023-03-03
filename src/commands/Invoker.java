@@ -48,35 +48,31 @@ public class Invoker {
         commandHashMap.put("count_by_head", new CountByHeadCommand());
         commandHashMap.put("print_ascending", new PrintAscendingCommand());
     }
-
+    private static void startConsoleProgram() throws FileNotFoundException {
+        DragonsCollection.putDragonsFromFile();
+        System.out.println("Введите команду (help : вывести справку по доступным командам)");
+        Scanner scanner = new Scanner(System.in);
+        while (programRunning) {
+            try {
+                try {
+                    split = scanner.nextLine().split(" ");
+                } catch (NoSuchElementException noSuchElementException) {
+                    System.out.println("Неверный ввод, перезапустите программу");
+                    programRunning = false;
+                }
+                commandHashMap.get(split[0]).execute();
+            } catch (NullPointerException nullPointerException) {
+                if (programRunning) { System.out.println("Неверная команда"); }
+            }
+        }
+        scanner.close();
+    }
     public static void invoker(String[] args) throws FileNotFoundException {
-
         if (args.length == 1) {
-
             if (args[0].endsWith(".csv")) {
-
                 file = args[0];
-
                 if (new File(file).canRead() & new File(file).exists()) {
-
-                    DragonsCollection.putDragonsFromFile();
-
-                    System.out.println("Введите команду (help : вывести справку по доступным командам)");
-                    Scanner scanner = new Scanner(System.in);
-
-                    while (programRunning) {
-                        try {
-                            try {
-                                split = scanner.nextLine().split(" ");
-                            } catch (NoSuchElementException noSuchElementException) {
-                                System.out.println("Неверный ввод, перезапустите программу");
-                                programRunning = false;
-                            }
-                            commandHashMap.get(split[0]).execute();
-                        } catch (NullPointerException nullPointerException) {
-                            if (programRunning) { System.out.println("Неверная команда"); }
-                        }
-                    }
+                    startConsoleProgram();
                 } else {
                     System.out.println("Нет доступа к файлу");
                 }

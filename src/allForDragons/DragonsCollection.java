@@ -14,15 +14,12 @@ public class DragonsCollection {
     public static LinkedHashSet<Dragon> getDragons() {
         return dragons;
     }
-
     public static void getInfo() {
         System.out.println("Тип коллекции: " + dragons.getClass().getTypeName().split(".util.")[1] + "\n" +
                 "Дата инициализации: " + dateOfInitialization + "\n" +
                 "Количество элементов: " + dragons.size() + "\n");
     }
-
     public static void putDragonsFromFile() throws FileNotFoundException {
-
         Scanner scanner = new Scanner(new File(Invoker.getFile()));
         String name;
         long x;
@@ -32,10 +29,7 @@ public class DragonsCollection {
         DragonType type;
         DragonCharacter character;
         double eyesCount;
-
-        boolean scan = true;
-        while (scan) {
-
+        while (scanner.hasNext()) {
             try {
                 String[] dragon = scanner.nextLine().split(", ");
                 if (dragon.length == 8) {
@@ -60,7 +54,6 @@ public class DragonsCollection {
                     } catch (Exception ignored) {}
                 }
             } catch (Exception ignored) {}
-            scan = scanner.hasNext();
         }
         scanner.close();
         System.out.println("Из файла добавлено объектов в коллекцию: " + dragons.size());
