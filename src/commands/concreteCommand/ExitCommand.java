@@ -2,16 +2,18 @@ package commands.concreteCommand;
 
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 
 public class ExitCommand implements Command {
-
+    /**Метод, завершающий программу*/
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if(Invoker.getSplit().length != 1){
+                throw new InvalidCommandException();
+            }
             Invoker.setProgramRunning(false);
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
 
     @Override

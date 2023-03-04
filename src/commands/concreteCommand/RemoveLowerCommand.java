@@ -3,11 +3,15 @@ package commands.concreteCommand;
 import allForDragons.*;
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class RemoveLowerCommand implements Command {
 
+    /**Метод, удаляющий из коллекции всех драконов младше заданного
+     * @param dragonExists параметр существования заданного дракона в коллекции
+     * @param thisDragon заданный дракон*/
     private void removerLower(boolean dragonExists, Dragon thisDragon) {
         int countOfDragons = 0;
         if (dragonExists) {
@@ -32,9 +36,14 @@ public class RemoveLowerCommand implements Command {
             System.out.println("Драконов младше заданного не существует");
         }
     }
+    /**Метод, находящий заданного дракона в коллекции и вызывающий метод removerLower
+     * @see RemoveLowerCommand#removerLower(boolean, Dragon) */
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 2) {
+        try {
+            if (Invoker.getSplit().length != 2) {
+                throw new InvalidCommandException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             boolean dragonExists = false;
             Dragon thisDragon = new Dragon("", new Coordinates(0,0), Long.parseLong("0"),Color.ORANGE, DragonType.WATER, DragonCharacter.FICKLE,new DragonHead(Double.parseDouble("0")));
@@ -49,9 +58,7 @@ public class RemoveLowerCommand implements Command {
             } else {
                 System.out.println("Коллекция пуста, заданного дракона не существует");
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
     @Override
     public String description() {

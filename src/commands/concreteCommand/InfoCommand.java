@@ -3,15 +3,18 @@ package commands.concreteCommand;
 import allForDragons.DragonsCollection;
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 
 public class InfoCommand implements Command {
+    /**Метод, выводящий информацию о коллекции*/
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if(Invoker.getSplit().length != 1){
+                throw new InvalidCommandException();
+            }
             DragonsCollection.getInfo();
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
 
     @Override

@@ -5,7 +5,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DragonAdder {
-
+    /**Метод для создания дракона с помощью консоли
+     * @return Dragon*/
     public static Dragon dragonAdder() {
         Scanner sc = new Scanner(System.in);
         String name = "k";

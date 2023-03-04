@@ -3,29 +3,30 @@ package commands.concreteCommand;
 import commands.Command;
 import commands.Invoker;
 import exceptions.InvalidCommandException;
-import exceptions.RecursionException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
+
+    /** Поле, отвечающее за работу счетчика повтора выполнения команды execute_script */
+    private static int recursionChecker = 0;
+    /** Поле, отвечающее за остановку выполнения команды execute_script при достижении 10 её повторов */
+    private boolean recursion = false;
+
     /**Метод, считывающий и выполняющий команды из файла  */
-    static ArrayList<String> files=new ArrayList<>();
     private void executorFromFile(String file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(file));
-        while (scanner.hasNext()) {
+        while (scanner.hasNext() & !recursion) {
             Invoker.setSplit(scanner.nextLine().split(" "));
             try {
-                if (!(Invoker.getSplit().length == 2 & Invoker.getSplit()[0].equals("execute_script"))) {
+                if (recursionChecker < 10) {
                     Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
                 } else {
-                    try {
-                        if(new File(file).getAbsolutePath().equals(new File(Invoker.getSplit()[1]).getAbsolutePath())){
-                            throw new InvalidCommandException();
-                        }
-                        Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
-                    }catch (InvalidCommandException e){System.out.println(e.getMessage());}
+                    recursionChecker = 0;
+                    recursion = true;
+                    System.out.println("Рекурсия!!!");
                 }
             } catch (NullPointerException ignored) {}
         }
@@ -36,29 +37,23 @@ public class ExecuteScriptCommand implements Command {
     @Override
     public void execute() {
         try {
-            if(Invoker.getSplit().length != 2){
+            if (Invoker.getSplit().length == 2) {
+                String file = Invoker.getSplit()[1];
+                try {
+                    if (new File(file).exists() & new File(file).canRead()) {
+                        recursion = false;
+                        ++recursionChecker;
+                        executorFromFile(file);
+                    } else {
+                        System.out.println("Нет доступа к файлу");
+                    }
+                } catch (FileNotFoundException fileNotFoundException) {
+                    System.out.println("Файл не найден");
+                }
+            } else {
                 throw new InvalidCommandException();
             }
-            String file = Invoker.getSplit()[1];
-            for(String s: files){
-                if(s.equals(new File(file).getAbsolutePath())){
-                    throw new RecursionException();
-                }
-            }
-            files.add(new File(file).getAbsolutePath());
-            try {
-                if (new File(file).exists() & new File(file).canRead()) {
-                    executorFromFile(file);
-                } else {
-                    System.out.println("Нет доступа к файлу");
-                }
-            } catch (FileNotFoundException fileNotFoundException) {
-                System.out.println("Файл не найден");
-            }
-        }catch (InvalidCommandException| RecursionException e){
-            System.out.println(e.getMessage());
-            files.clear();
-        }
+        } catch (InvalidCommandException e){System.out.println(e.getMessage());}
     }
     @Override
     public String description() {

@@ -5,29 +5,33 @@ import allForDragons.DragonsCollection;
 import allForDragons.HeadComparator;
 import commands.Command;
 import commands.Invoker;
-
+import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class MaxByHeadCommand implements Command {
 
+    /**Метод, выводящий дракона с максимальным значением head*/
     private void maxByHeadPrinter() {
         ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
         HeadComparator headComparator = new HeadComparator();
         Dragon dragon = Collections.max(dragons, headComparator);
         System.out.println(dragon);
     }
+    /**Метод, выполняющий команду с помощью maxByHeadPrinter
+     * @see MaxByHeadCommand#maxByHeadPrinter() */
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if(Invoker.getSplit().length != 1){
+                throw new InvalidCommandException();
+            }
             if (DragonsCollection.getDragons().size() != 0) {
                 maxByHeadPrinter();
             } else {
                 System.out.println("Коллекция пуста");
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
     @Override
     public String description() {

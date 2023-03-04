@@ -4,10 +4,13 @@ import allForDragons.*;
 import commands.Command;
 import commands.Invoker;
 import exceptions.IllegalValueOfXException;
+import exceptions.InvalidCommandException;
 import java.util.Scanner;
 
 public class UpdateCommand implements Command {
 
+    /**Метод, обновляющий имя дракона
+     * @param dragon дракон, у которого меняется имя*/
     private void updateName(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -21,6 +24,8 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий возраст дракона
+     * @param dragon дракон, у которого меняется возраст*/
     private void updateAge(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -35,6 +40,8 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий тип дракона
+     * @param dragon дракон, у которого меняется тип*/
     private void updateType(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -52,6 +59,8 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий цвет дракона
+     * @param dragon дракон, у которого меняется цвет*/
     private void updateColor(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -70,6 +79,8 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий характер дракона
+     * @param dragon дракон, у которого меняется характер*/
     private void updateCharacter(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -88,6 +99,8 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий голову (количество глаз) дракона
+     * @param dragon дракон, у которого меняется голова (количество глаз)*/
     private void updateHead(Scanner scanner, Dragon dragon) {
         boolean i = true;
         while (i) {
@@ -101,10 +114,16 @@ public class UpdateCommand implements Command {
             }
         }
     }
+    /**Метод, обновляющий координаты дракона
+     * @param dragon дракон, у которого меняется координаты
+     * @see UpdateCommand#getNewXCoordinate(Scanner)
+     * @see UpdateCommand#getNewYCoordinate(Scanner) */
     private void updateCoordinates(Scanner scanner, Dragon dragon) {
         dragon.getCoordinates().setX(getNewXCoordinate(scanner));
         dragon.getCoordinates().setY(getNewYCoordinate(scanner));
     }
+    /**Метод, получающий новую координату х
+     * @return возвращает координату х*/
     private long getNewXCoordinate(Scanner scanner) {
         long x = 0;
         boolean i = true;
@@ -128,6 +147,8 @@ public class UpdateCommand implements Command {
         }
         return x;
     }
+    /**Метод, получающий новую координату у
+     * @return возвращает координату у*/
     private float getNewYCoordinate(Scanner scanner) {
         float y = 0;
         boolean i = true;
@@ -143,6 +164,8 @@ public class UpdateCommand implements Command {
         }
         return y;
     }
+    /**Метод, выводящий варианты параметров для изменения и возвращающий один из них
+     * @return возвращает цифру, обозначающую параметр для изменения*/
     private String requestInput(Scanner scanner) {
         boolean i = true;
         String s = "";
@@ -161,6 +184,16 @@ public class UpdateCommand implements Command {
         }
         return s;
     }
+    /**Метод, вызывающий нужный метод для обновления определенного параметра
+     * @param dragon дракон, параметр которого нужно изменить
+     * @param s число, обозначающее, какую характеристику дракона надо изменить
+     * @see UpdateCommand#updateName(Scanner, Dragon)
+     * @see UpdateCommand#updateAge(Scanner, Dragon)
+     * @see UpdateCommand#updateType(Scanner, Dragon)
+     * @see UpdateCommand#updateColor(Scanner, Dragon)
+     * @see UpdateCommand#updateCharacter(Scanner, Dragon)
+     * @see UpdateCommand#updateHead(Scanner, Dragon)
+     * @see UpdateCommand#updateCoordinates(Scanner, Dragon) */
     private void fieldsUpdater(String s, Scanner scanner, Dragon dragon) {
         switch (s) {
             case "1" -> updateName(scanner, dragon);
@@ -173,6 +206,10 @@ public class UpdateCommand implements Command {
         }
         System.out.println("Параметр дракона успешно изменён");
     }
+    /**Метод, обновляющий данные о драконе
+     * @param id id дракона, параметр которого нужно изменить
+     * @see UpdateCommand#requestInput(Scanner)
+     * @see UpdateCommand#fieldsUpdater(String, Scanner, Dragon) */
     private void updateDragon(long id) {
         boolean dragonExists = false;
         for (Dragon dragon : DragonsCollection.getDragons()) {
@@ -189,18 +226,21 @@ public class UpdateCommand implements Command {
             if (!dragonExists) System.out.println("Такого дракона не существует");
         }
     }
+    /**Метод, исполняющий команду
+     * @see UpdateCommand#updateDragon(long) */
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 2) {
+        try {
+            if (Invoker.getSplit().length != 2){
+                throw new InvalidCommandException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             if (!DragonsCollection.getDragons().isEmpty()) {
                 updateDragon(id);
             } else {
                 System.out.println("Такого дракона не существует");
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
 
     @Override

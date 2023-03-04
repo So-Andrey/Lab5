@@ -3,14 +3,19 @@ package commands.concreteCommand;
 import allForDragons.*;
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class AddIfMinCommand implements Command {
-
+    /**Метод, проверяющий, что дракон наименьший элемент в коллекции (по возрасту)
+     * @see DragonAdder#dragonAdder()*/
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if (Invoker.getSplit().length != 1) {
+                throw new InvalidCommandException();
+            }
             ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             Dragon dragon = DragonAdder.dragonAdder();
             if (dragons.size() == 0) {
@@ -25,10 +30,9 @@ public class AddIfMinCommand implements Command {
                     System.out.println("Новый элемент не добавлен, так как возраст заданного дракона слишком большой");
                 }
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
+
     @Override
     public String description() {
         return "add_if_min {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции";

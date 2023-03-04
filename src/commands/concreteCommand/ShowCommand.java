@@ -3,12 +3,17 @@ package commands.concreteCommand;
 import commands.Command;
 import allForDragons.*;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 
 public class ShowCommand implements Command {
 
+    /**Метод, выводящий все элементы коллекции*/
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if(Invoker.getSplit().length != 1){
+                throw new InvalidCommandException();
+            }
             if (DragonsCollection.getDragons().isEmpty()) {
                 System.out.println("Коллекция пуста");
             } else {
@@ -16,7 +21,7 @@ public class ShowCommand implements Command {
                     System.out.println(dragon);
                 }
             }
-        } else { System.out.println("Неверная команда"); }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
 
     @Override

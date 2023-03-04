@@ -2,18 +2,20 @@ package commands.concreteCommand;
 
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 
 public class HelpCommand implements Command {
-
+    /**метод, выводящий справку по командам*/
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 1) {
+        try {
+            if(Invoker.getSplit().length != 1){
+                throw new InvalidCommandException();
+            }
             for (Command command : Invoker.getCommandHashMap().values()) {
                 System.out.println(command.description());
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
 
     @Override

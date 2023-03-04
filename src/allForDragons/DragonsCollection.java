@@ -14,11 +14,13 @@ public class DragonsCollection {
     public static LinkedHashSet<Dragon> getDragons() {
         return dragons;
     }
+    /**Метод, выводящий информацию о коллекции*/
     public static void getInfo() {
         System.out.println("Тип коллекции: " + dragons.getClass().getTypeName().split(".util.")[1] + "\n" +
                 "Дата инициализации: " + dateOfInitialization + "\n" +
                 "Количество элементов: " + dragons.size() + "\n");
     }
+    /**Метод для добавления драконов из файла в коллекцию*/
     public static void putDragonsFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(Invoker.getFile()));
         String name;

@@ -4,9 +4,12 @@ import allForDragons.Dragon;
 import allForDragons.DragonsCollection;
 import commands.Command;
 import commands.Invoker;
+import exceptions.InvalidCommandException;
 
 public class RemoveByIdCommand implements Command {
 
+    /**Метод, удаляющий дракона по значению id
+     * @param id id дракона, которого надо удалить*/
     private void removerById(long id) {
         boolean dragonExist = false;
         for (Dragon dragon : DragonsCollection.getDragons()) {
@@ -20,18 +23,21 @@ public class RemoveByIdCommand implements Command {
             System.out.println("Такого дракона не существует");
         }
     }
+    /**Выполняет команду с помощью removerById
+     * @see RemoveByIdCommand#removerById(long) */
     @Override
     public void execute() {
-        if (Invoker.getSplit().length == 2) {
+        try {
+            if(Invoker.getSplit().length != 2){
+                throw new InvalidCommandException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             if (!DragonsCollection.getDragons().isEmpty()) {
                 removerById(id);
             } else {
                 System.out.println("Коллекция пуста, такого дракона не существует");
             }
-        } else {
-            System.out.println("Неверная команда");
-        }
+        } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
     @Override
     public String description() {

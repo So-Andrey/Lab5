@@ -2,7 +2,6 @@ package commands;
 
 import allForDragons.DragonsCollection;
 import commands.concreteCommand.*;
-
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -48,6 +47,7 @@ public class Invoker {
         commandHashMap.put("count_by_head", new CountByHeadCommand());
         commandHashMap.put("print_ascending", new PrintAscendingCommand());
     }
+    /**Метод, реализующий работу с консолью*/
     private static void startConsoleProgram() throws FileNotFoundException {
         DragonsCollection.putDragonsFromFile();
         System.out.println("Введите команду (help : вывести справку по доступным командам)");
@@ -67,6 +67,8 @@ public class Invoker {
         }
         scanner.close();
     }
+    /**Метод, проверяющий начальный файл и запускающий работу с коллекцией
+     * @see Invoker#startConsoleProgram() */
     public static void invoker(String[] args) throws FileNotFoundException {
         if (args.length == 1) {
             if (args[0].endsWith(".csv")) {
