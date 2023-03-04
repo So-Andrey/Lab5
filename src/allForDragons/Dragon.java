@@ -1,9 +1,8 @@
 package allForDragons;
 
-import java.util.Objects;
 import java.util.UUID;
-
 import java.util.Date;
+
 public class Dragon implements Comparable<Dragon>{
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -29,17 +28,6 @@ public class Dragon implements Comparable<Dragon>{
         this.head = head;
         this.type = type;
         this.color = color;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Dragon dragon)) return false;
-        return id == dragon.id && Objects.equals(name, dragon.name) && Objects.equals(coordinates, dragon.coordinates) && Objects.equals(creationDate, dragon.creationDate) && Objects.equals(age, dragon.age) && color == dragon.color && type == dragon.type && character == dragon.character && Objects.equals(head, dragon.head);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, coordinates, creationDate, age, color, type, character, head);
     }
 
     public long getId() {
