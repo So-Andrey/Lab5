@@ -8,19 +8,19 @@ import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
 
+    private static int recursionChecker = 0;
+    private boolean recursion = false;
+
     private void executorFromFile(String file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(file));
-        while (scanner.hasNext()) {
+        while (scanner.hasNext() & !recursion) {
             Invoker.setSplit(scanner.nextLine().split(" "));
             try {
-                if (!(Invoker.getSplit().length == 2 & Invoker.getSplit()[0].equals("execute_script"))) {
+                if (recursionChecker < 10) {
                     Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
                 } else {
-                    if (!(new File(file).getAbsolutePath().equals(new File(Invoker.getSplit()[1]).getAbsolutePath()))) {
-                        Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
-                    } else {
-                        System.out.println("Неверная команда");
-                    }
+                    recursion = true;
+                    System.out.println("Рекурсия!!!");
                 }
             } catch (NullPointerException ignored) {}
         }
@@ -32,6 +32,7 @@ public class ExecuteScriptCommand implements Command {
             String file = Invoker.getSplit()[1];
             try {
                 if (new File(file).exists() & new File(file).canRead()) {
+                    ++recursionChecker;
                     executorFromFile(file);
                 } else {
                     System.out.println("Нет доступа к файлу");
