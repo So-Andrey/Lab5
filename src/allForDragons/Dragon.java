@@ -14,13 +14,8 @@ public class Dragon implements Comparable<Dragon>{
     private DragonCharacter character; //Поле может быть null
     private DragonHead head;
     public Dragon(String name, Coordinates coordinates, Long age, Color color, DragonType type, DragonCharacter character, DragonHead head){
+        setId();
         creationDate = new Date();
-        UUID myuuid = UUID.randomUUID();
-        id = myuuid.getMostSignificantBits();
-        while (id <= 0) {
-            myuuid = UUID.randomUUID();
-            id = myuuid.getMostSignificantBits();
-        }
         this.name = name;
         this.age = age;
         this.coordinates = coordinates;
@@ -28,6 +23,14 @@ public class Dragon implements Comparable<Dragon>{
         this.head = head;
         this.type = type;
         this.color = color;
+    }
+    private void setId() {
+        UUID uuid = UUID.randomUUID();
+        id = uuid.getMostSignificantBits();
+        while (id <= 0) {
+            uuid = UUID.randomUUID();
+            id = uuid.getMostSignificantBits();
+        }
     }
 
     public long getId() {
@@ -94,7 +97,7 @@ public class Dragon implements Comparable<Dragon>{
                 "Координаты: (" + coordinates.getX() + "; " + coordinates.getY() + ")\n" +
                 "Дата и время создания: " + creationDate + "\n";
     }
-
+    /** Метод для сравнения драконов по возрасту*/
     @Override
     public int compareTo(Dragon dragon) {
         int result = 0;
