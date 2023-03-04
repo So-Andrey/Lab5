@@ -3,13 +3,18 @@ package commands.concreteCommand;
 import commands.Command;
 import commands.Invoker;
 import exceptions.InvalidCommandException;
+import exceptions.RecursionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
-    /**Метод, считывающий и выполняющий команды из файла*/
+    /**Метод, считывающий и выполняющий команды из файла
+     * @param file файл, команды которого выполняются*/
+    static ArrayList<String> files=new ArrayList<>();
     private void executorFromFile(String file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(file));
         while (scanner.hasNext()) {
@@ -38,6 +43,12 @@ public class ExecuteScriptCommand implements Command {
                 throw new InvalidCommandException();
             }
             String file = Invoker.getSplit()[1];
+            for(String s: files){
+                if(s.equals(new File(file).getAbsolutePath())){
+                    throw new RecursionException();
+                }
+            }
+            files.add(new File(file).getAbsolutePath());
             try {
                 if (new File(file).exists() & new File(file).canRead()) {
                     executorFromFile(file);
@@ -47,7 +58,10 @@ public class ExecuteScriptCommand implements Command {
             } catch (FileNotFoundException fileNotFoundException) {
                 System.out.println("Файл не найден");
             }
-        }catch (InvalidCommandException e){System.out.println(e.getMessage());}
+        }catch (InvalidCommandException| RecursionException e){
+            System.out.println(e.getMessage());
+            files.clear();
+        }
     }
     @Override
     public String description() {
