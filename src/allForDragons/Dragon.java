@@ -66,10 +66,6 @@ public class Dragon implements Comparable<Dragon>{
         this.name = name;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
     public void setAge(Long age) {
         this.age = age;
     }
@@ -84,10 +80,6 @@ public class Dragon implements Comparable<Dragon>{
 
     public void setCharacter(DragonCharacter character) {
         this.character = character;
-    }
-
-    public void setHead(DragonHead head) {
-        this.head = head;
     }
 
     @Override
