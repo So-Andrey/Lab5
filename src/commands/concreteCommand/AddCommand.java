@@ -129,7 +129,6 @@ public class AddCommand implements Command {
                     System.out.println("Неверный тип данных");
                 }
             }
-            sc.close();
         } else {
             System.out.println("Неверная команда");
         }
