@@ -8,26 +8,23 @@ import java.util.Collections;
 
 public class AddIfMinCommand implements Command {
 
-    private String ifMinDragonAdder() {
-        ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
-        Dragon dragon = new AddCommand().dragonAdder();
-        if (dragons.size() == 0) {
-            DragonsCollection.getDragons().add(dragon);
-            return "Новый элемент коллекции добавлен";
-        } else {
-            Collections.sort(dragons);
-            if (dragon.getAge() < dragons.get(0).getAge()) {
-                DragonsCollection.getDragons().add(dragon);
-                return "Новый элемент коллекции добавлен";
-            } else {
-                return "Новый элемент не добавлен, так как возраст заданного дракона слишком большой";
-            }
-        }
-    }
     @Override
     public void execute() {
         if (Invoker.getSplit().length == 1) {
-            System.out.println(ifMinDragonAdder());
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
+            Dragon dragon = DragonAdder.dragonAdder();
+            if (dragons.size() == 0) {
+                DragonsCollection.getDragons().add(dragon);
+                System.out.println("Новый элемент коллекции добавлен");
+            } else {
+                Collections.sort(dragons);
+                if (dragon.getAge() < dragons.get(0).getAge()) {
+                    DragonsCollection.getDragons().add(dragon);
+                    System.out.println("Новый элемент коллекции добавлен");
+                } else {
+                    System.out.println("Новый элемент не добавлен, так как возраст заданного дракона слишком большой");
+                }
+            }
         } else {
             System.out.println("Неверная команда");
         }
