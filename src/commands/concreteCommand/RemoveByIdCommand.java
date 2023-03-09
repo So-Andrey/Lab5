@@ -6,9 +6,14 @@ import commands.Command;
 import commands.Invoker;
 import exceptions.InvalidCommandException;
 
+import java.util.InputMismatchException;
+
 public class RemoveByIdCommand implements Command {
-    /**Метод, удяляющий дракона по значению id
-     * @param id айди дракона, которого надо удалить*/
+    /**
+     * Метод, удяляющий дракона по значению id
+     *
+     * @param id айди дракона, которого надо удалить
+     */
     private void removerById(long id) {
         boolean dragonExist = false;
         for (Dragon dragon : DragonsCollection.getDragons()) {
@@ -22,13 +27,22 @@ public class RemoveByIdCommand implements Command {
             System.out.println("Такого дракона не существует");
         }
     }
-    /**Выплняет команду с помощью removerById
-     * @see RemoveByIdCommand#removerById(long) */
+
+    /**
+     * Выплняет команду с помощью removerById
+     *
+     * @see RemoveByIdCommand#removerById(long)
+     */
     @Override
     public void execute() {
         try {
-            if(Invoker.getSplit().length != 2){
+            if (Invoker.getSplit().length != 2) {
                 throw new InvalidCommandException();
+            }
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException ex) {
+                throw new InputMismatchException();
             }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             if (!DragonsCollection.getDragons().isEmpty()) {
@@ -36,8 +50,13 @@ public class RemoveByIdCommand implements Command {
             } else {
                 System.out.println("Коллекция пуста, такого дракона не существует");
             }
-        }catch (InvalidCommandException e){System.out.println(e.getMessage());}
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+        } catch (InputMismatchException inputMismatchException) {
+            System.out.println("Неверный тип данных");
+        }
     }
+
     @Override
     public String description() {
         return "remove_by_id id : удалить элемент из коллекции по его id";
