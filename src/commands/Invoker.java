@@ -71,15 +71,11 @@ public class Invoker {
      * @see Invoker#startConsoleProgram() */
     public static void invoker(String[] args) throws FileNotFoundException {
         if (args.length == 1) {
-            if (args[0].endsWith(".csv")) {
-                file = args[0];
-                if (new File(file).canRead() & new File(file).exists()) {
-                    startConsoleProgram();
-                } else {
-                    System.out.println("Нет доступа к файлу");
-                }
+            file = args[0];
+            if (new File(file).canRead() & new File(file).exists()) {
+                startConsoleProgram();
             } else {
-                System.out.println("Неверное расширение файла");
+                System.out.println("Нет доступа к файлу");
             }
         } else {
             System.out.println("Неверно указано имя файла");
