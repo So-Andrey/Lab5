@@ -55,7 +55,7 @@ public class Invoker {
         while (programRunning) {
             try {
                 try {
-                    split = scanner.nextLine().split(" ");
+                    split = scanner.nextLine().trim().split(" ");
                 } catch (NoSuchElementException noSuchElementException) {
                     System.out.println("Неверный ввод, перезапустите программу");
                     programRunning = false;
