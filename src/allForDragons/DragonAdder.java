@@ -122,4 +122,76 @@ public class DragonAdder {
         }
         return new Dragon(name, new Coordinates(x, y), age, dragonColor, dragonType, dragonCharacter, new DragonHead(eyesCount));
     }
+    /**Метод для добавления дракона из файла
+     * @return Dragon*/
+    public static Dragon dragonFromFileAdder(Scanner sc) {
+        DragonType dragonType = null;
+        DragonCharacter dragonCharacter = null;
+        Color dragonColor = null;
+        String name = sc.nextLine();
+        if (name.trim().isEmpty()) {
+            throw new InputMismatchException();
+        }
+        String s = sc.nextLine();
+        if (!s.matches("([-+]?\\d+)")) {
+            throw new InputMismatchException();
+        }
+        try {
+            Long.parseLong(s);
+        } catch (NumberFormatException numberFormatException) {
+            throw new InputMismatchException();
+        }
+        long x = Long.parseLong(s);
+        if (x > 610) {
+            throw new InputMismatchException();
+        }
+        s = sc.nextLine();
+        try {
+            Double.parseDouble(s);
+        } catch (NumberFormatException ex) {
+            throw new InputMismatchException();
+        }
+        float y = Float.parseFloat(s);
+        s = sc.nextLine();
+        if(!s.matches("([-+]?\\d+)")){
+            throw new InputMismatchException();
+        }
+        Long age = Long.parseLong(s);
+        String color = sc.nextLine();
+        if (!(color.equals("1")||color.equals("2")||color.equals("3")||color.equals("GREEN")||color.equals("ORANGE")||color.equals("BROWN")||color.isEmpty())) {
+            throw new InputMismatchException();
+        }
+        switch (color) {
+            case "1", "GREEN" -> dragonColor = Color.GREEN;
+            case "2", "ORANGE" -> dragonColor = Color.ORANGE;
+            case "3", "BROWN" -> dragonColor = Color.BROWN;
+        }
+        String type = sc.nextLine();
+        if (!(type.equals("1")||type.equals("2")||type.equals("3")||type.equals("WATER")||type.equals("UNDERGROUND")||type.equals("FIRE"))) {
+            throw new InputMismatchException();
+        }
+        switch (type) {
+            case "1", "WATER" -> dragonType = DragonType.WATER;
+            case "2", "UNDERGROUND" -> dragonType = DragonType.UNDERGROUND;
+            case "3", "FIRE" -> dragonType = DragonType.FIRE;
+        }
+        String character = sc.nextLine();
+        if (!(character.equals("1")||character.equals("2")||character.equals("3")||character.equals("CUNNING")||character.equals("WISE")||character.equals("CHAOTIC_EVIL")||character.equals("FICKLE")||character.equals("4"))) {
+            throw new InputMismatchException();
+        }
+        switch (character) {
+            case "1", "CUNNING" -> dragonCharacter = DragonCharacter.CUNNING;
+            case "2", "WISE" -> dragonCharacter = DragonCharacter.WISE;
+            case "3", "CHAOTIC_EVIL" -> dragonCharacter = DragonCharacter.CHAOTIC_EVIL;
+            case "4", "FICKLE" -> dragonCharacter = DragonCharacter.FICKLE;
+        }
+        s = sc.nextLine();
+        try {
+            Double.parseDouble(s);
+        } catch (NumberFormatException numberFormatException){
+            throw new InputMismatchException();
+        }
+        Double eyesCount = Double.parseDouble(s);
+        return new Dragon(name, new Coordinates(x, y), age, dragonColor, dragonType, dragonCharacter, new DragonHead(eyesCount));
+    }
 }

@@ -6,6 +6,8 @@ import commands.Invoker;
 import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class AddIfMinCommand implements Command {
     /**Метод, проверяющий, что дракон наименьший элемент в коллекции (по возрасту)
@@ -32,7 +34,26 @@ public class AddIfMinCommand implements Command {
             }
         } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
-
+    /** Метод, выполняющий команду add_if_min из файла
+     * @see DragonAdder#dragonFromFileAdder(Scanner) */
+    protected static void adderIfMinFromFile(Scanner scanner) {
+        try {
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
+            Dragon dragon = DragonAdder.dragonFromFileAdder(scanner);
+            if (dragons.size() == 0) {
+                DragonsCollection.getDragons().add(dragon);
+                System.out.println("Новый элемент коллекции добавлен");
+            } else {
+                Collections.sort(dragons);
+                if (dragon.getAge() < dragons.get(0).getAge()) {
+                    DragonsCollection.getDragons().add(dragon);
+                    System.out.println("Новый элемент коллекции добавлен");
+                } else {
+                    System.out.println("Новый элемент не добавлен, так как возраст заданного дракона слишком большой");
+                }
+            }
+        } catch (InputMismatchException ignored) {}
+    }
     @Override
     public String description() {
         return "add_if_min {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции";

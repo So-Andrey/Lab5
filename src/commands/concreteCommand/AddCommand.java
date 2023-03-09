@@ -6,6 +6,7 @@ import allForDragons.*;
 import commands.Invoker;
 import exceptions.InvalidCommandException;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class AddCommand implements Command {
     /**Метод, добавляющий в коллекцию нового дракона с помощью метода dragonAdder
@@ -20,9 +21,16 @@ public class AddCommand implements Command {
             System.out.println("Новый элемент коллекции добавлен");
         } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
+    /** Метод, выполняющий команду add из файла
+     * @see DragonAdder#dragonFromFileAdder(Scanner) */
+    protected static void adderFromFile(Scanner scanner) {
+        try {
+            DragonsCollection.getDragons().add(DragonAdder.dragonFromFileAdder(scanner));
+            System.out.println("Новый элемент коллекции добавлен");
+        } catch (InputMismatchException ignored) {}
+    }
     @Override
     public String description() {
         return "add {element} : добавить новый элемент в коллекцию";
     }
 }
-
