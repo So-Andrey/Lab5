@@ -28,7 +28,12 @@ public class RemoveByIdCommand implements Command {
     @Override
     public void execute() {
         try {
-            if(Invoker.getSplit().length != 2){
+            if (Invoker.getSplit().length != 2) {
+                throw new InvalidCommandException();
+            }
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException ex) {
                 throw new InvalidCommandException();
             }
             long id = Long.parseLong(Invoker.getSplit()[1]);

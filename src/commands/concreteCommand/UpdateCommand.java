@@ -234,6 +234,11 @@ public class UpdateCommand implements Command {
             if (Invoker.getSplit().length != 2){
                 throw new InvalidCommandException();
             }
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException ex) {
+                throw new InvalidCommandException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             if (!DragonsCollection.getDragons().isEmpty()) {
                 updateDragon(id);

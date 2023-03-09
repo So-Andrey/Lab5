@@ -44,6 +44,11 @@ public class RemoveLowerCommand implements Command {
             if (Invoker.getSplit().length != 2) {
                 throw new InvalidCommandException();
             }
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException ex) {
+                throw new InvalidCommandException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             boolean dragonExists = false;
             Dragon thisDragon = new Dragon("", new Coordinates(0,0), Long.parseLong("0"),Color.ORANGE, DragonType.WATER, DragonCharacter.FICKLE,new DragonHead(Double.parseDouble("0")));
