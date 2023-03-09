@@ -51,7 +51,7 @@ public class ExecuteScriptCommand implements Command {
                 if (file.startsWith("~")) {
                     try {
                         String rootDirectory = ExecuteScriptCommand.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath().split("/")[1];
-                        file = rootDirectory + file.split("~")[1];
+                        file = "/" + rootDirectory + file.split("~")[1];
                     } catch (URISyntaxException ignored) {}
                 }
                 try {
