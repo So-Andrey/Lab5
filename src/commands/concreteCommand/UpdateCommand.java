@@ -231,8 +231,13 @@ public class UpdateCommand implements Command {
     @Override
     public void execute() {
         try {
-            if (Invoker.getSplit().length != 2){
+            if (Invoker.getSplit().length != 2) {
                 throw new InvalidCommandException();
+            }
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException ex) {
+                throw new InputMismatchException();
             }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             if (!DragonsCollection.getDragons().isEmpty()) {
@@ -240,7 +245,11 @@ public class UpdateCommand implements Command {
             } else {
                 System.out.println("Такого дракона не существует");
             }
-        } catch (InvalidCommandException e){ System.out.println(e.getMessage());}
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+        } catch (InputMismatchException inputMismatchException) {
+            System.out.println("Неверный тип данных");
+        }
     }
 
     @Override
