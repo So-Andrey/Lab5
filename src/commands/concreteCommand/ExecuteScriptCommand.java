@@ -5,6 +5,7 @@ import commands.Invoker;
 import exceptions.InvalidCommandException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
@@ -47,6 +48,12 @@ public class ExecuteScriptCommand implements Command {
         try {
             if (Invoker.getSplit().length == 2) {
                 String file = Invoker.getSplit()[1];
+                if (file.startsWith("~")) {
+                    try {
+                        String rootDirectory = ExecuteScriptCommand.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath().split("/")[1];
+                        file = rootDirectory + file.split("~")[1];
+                    } catch (URISyntaxException ignored) {}
+                }
                 try {
                     if (new File(file).exists() & new File(file).canRead()) {
                         recursion = false;
