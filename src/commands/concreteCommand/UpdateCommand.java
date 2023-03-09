@@ -223,8 +223,8 @@ public class UpdateCommand implements Command {
                     fieldsUpdater(s, scanner, dragon);
                 }
             }
-            if (!dragonExists) System.out.println("Такого дракона не существует");
         }
+        if (!dragonExists) System.out.println("Такого дракона не существует");
     }
     /**Метод, исполняющий команду
      * @see UpdateCommand#updateDragon(long) */
