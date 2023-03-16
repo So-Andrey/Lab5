@@ -9,7 +9,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AddCommand implements Command {
-    /**Метод, добавляющий в коллекцию нового дракона с помощью метода dragonAdder
+    /**Метод, добавляющий в коллекцию нового дракона
      * @see DragonAdder#dragonAdder() */
     @Override
     public void execute() throws InputMismatchException {

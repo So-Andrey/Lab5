@@ -5,8 +5,8 @@ import commands.Command;
 import commands.Invoker;
 import exceptions.IllegalValueOfXException;
 import exceptions.InvalidCommandException;
-
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UpdateCommand implements Command {
@@ -49,7 +49,7 @@ public class UpdateCommand implements Command {
         while (i) {
             System.out.println("Введите новый тип дракона (Цифру или полное название) 1 - WATER, 2 - UNDERGROUND, 3 - FIRE");
             String type = scanner.nextLine();
-            if (type.equals("1") || type.equals("2") || type.equals("3") || type.equals("WATER") || type.equals("UNDERGROUND") || type.equals("FIRE")) {
+            if (type.matches("[1-3]") || type.equals("WATER") || type.equals("UNDERGROUND") || type.equals("FIRE")) {
                 switch (type) {
                     case "1", "WATER" -> dragon.setType(DragonType.WATER);
                     case "2", "UNDERGROUND" -> dragon.setType(DragonType.UNDERGROUND);
@@ -68,7 +68,7 @@ public class UpdateCommand implements Command {
         while (i) {
             System.out.println("Введите новый цвет дракона (Цифру или полное название) 1 - GREEN, 2 - ORANGE, 3 - BROWN");
             String color = scanner.nextLine();
-            if (color.equals("1") || color.equals("2") || color.equals("3") || color.equals("GREEN") || color.equals("ORANGE") || color.equals("BROWN") || color.isEmpty()) {
+            if (color.matches("[1-3]") || color.equals("GREEN") || color.equals("ORANGE") || color.equals("BROWN") || color.isEmpty()) {
                 switch (color) {
                     case "1", "GREEN" -> dragon.setColor(Color.GREEN);
                     case "2", "ORANGE" -> dragon.setColor(Color.ORANGE);
@@ -88,7 +88,7 @@ public class UpdateCommand implements Command {
         while (i) {
             System.out.println("Введите новый характер дракона (Цифру или полное название) 1 - CUNNING, 2 - WISE, 3 - CHAOTIC_EVIL, 4 - FICKLE");
             String character = scanner.nextLine();
-            if (character.equals("1") || character.equals("2") || character.equals("3") || character.equals("CUNNING") || character.equals("WISE") || character.equals("CHAOTIC_EVIL") || character.equals("FICKLE") || character.equals("4")) {
+            if (character.matches("[1-4]") || character.equals("CUNNING") || character.equals("WISE") || character.equals("CHAOTIC_EVIL") || character.equals("FICKLE")) {
                 switch (character) {
                     case "1", "CUNNING" -> dragon.setCharacter(DragonCharacter.CUNNING);
                     case "2", "WISE" -> dragon.setCharacter(DragonCharacter.WISE);
@@ -206,7 +206,7 @@ public class UpdateCommand implements Command {
             case "6" -> updateHead(scanner, dragon);
             case "7" -> updateCoordinates(scanner, dragon);
         }
-        System.out.println("Параметр дракона успешно изменён");
+        System.out.println("Параметр дракона успешно обновлён");
     }
     /**Метод, обновляющий данные о драконе
      * @param id id дракона, параметр которого нужно изменить
@@ -219,7 +219,7 @@ public class UpdateCommand implements Command {
                 dragonExists = true;
                 Scanner scanner = new Scanner(System.in);
                 String s = requestInput(scanner);
-                if (!s.equals("1") && !s.equals("2") && !s.equals("3") && !s.equals("4") && !s.equals("5") && !s.equals("6") && !s.equals("7")) {
+                if (!(s.matches("[1-7]"))) {
                     System.out.println("Неверный параметр");
                 } else {
                     fieldsUpdater(s, scanner, dragon);
@@ -233,7 +233,7 @@ public class UpdateCommand implements Command {
     @Override
     public void execute() {
         try {
-            if (Invoker.getSplit().length != 2){
+            if (Invoker.getSplit().length != 2) {
                 throw new InvalidCommandException();
             }
             try {
@@ -249,9 +249,18 @@ public class UpdateCommand implements Command {
             }
         } catch (InvalidCommandException e) { System.out.println(e.getMessage()); }
     }
-    /** Метод, обновляющий дракона параметрами из файла */
+    /** Метод, обновляющий дракона параметрами из файла
+     * @see UpdateCommand#parametersReader(Scanner)
+     * @see UpdateCommand#fieldsUpdaterFromFile(String, String, Dragon, Scanner) */
     protected static void updaterFromFile(Scanner scanner) {
+        String[] parameters = parametersReader(scanner);
         try {
+            if (Invoker.getSplit().length != 2) throw new InputMismatchException();
+            try {
+                Long.parseLong(Invoker.getSplit()[1]);
+            } catch (NumberFormatException numberFormatException) {
+                throw new InputMismatchException();
+            }
             long id = Long.parseLong(Invoker.getSplit()[1]);
             boolean dragonExists = false;
             Dragon thisDragon = new Dragon("", new Coordinates(0, 0), Long.parseLong("0"), null, DragonType.WATER, DragonCharacter.FICKLE, new DragonHead(Double.parseDouble("0")));
@@ -261,101 +270,134 @@ public class UpdateCommand implements Command {
                     thisDragon = dragon;
                 }
             }
-            if (!dragonExists) throw new NumberFormatException();
-            String s = scanner.nextLine();
-            if (s.matches(("[1-7]"))) {
-                switch (s) {
-                    case "1" -> {
-                        String name = scanner.nextLine();
-                        if (!name.trim().isEmpty()) {
-                            thisDragon.setName(name);
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "2" -> {
-                        String string = scanner.nextLine();
-                        if (string.matches("([-+]?\\d+)")) {
-                            long age = Long.parseLong(string);
-                            thisDragon.setAge(age);
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "3" -> {
-                        String type = scanner.nextLine();
-                        if (type.equals("1") || type.equals("2") || type.equals("3") || type.equals("WATER") || type.equals("UNDERGROUND") || type.equals("FIRE")) {
-                            switch (type) {
-                                case "1", "WATER" -> thisDragon.setType(DragonType.WATER);
-                                case "2", "UNDERGROUND" -> thisDragon.setType(DragonType.UNDERGROUND);
-                                case "3", "FIRE" -> thisDragon.setType(DragonType.FIRE);
-                            }
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "4" -> {
-                        String color = scanner.nextLine();
-                        if (color.equals("1") || color.equals("2") || color.equals("3") || color.equals("GREEN") || color.equals("ORANGE") || color.equals("BROWN") || color.isEmpty()) {
-                            switch (color) {
-                                case "1", "GREEN" -> thisDragon.setColor(Color.GREEN);
-                                case "2", "ORANGE" -> thisDragon.setColor(Color.ORANGE);
-                                case "3", "BROWN" -> thisDragon.setColor(Color.BROWN);
-                                case "" -> thisDragon.setColor(null);
-                            }
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "5" -> {
-                        String character = scanner.nextLine();
-                        if (character.equals("1") || character.equals("2") || character.equals("3") || character.equals("CUNNING") || character.equals("WISE") || character.equals("CHAOTIC_EVIL") || character.equals("FICKLE") || character.equals("4")) {
-                            switch (character) {
-                                case "1", "CUNNING" -> thisDragon.setCharacter(DragonCharacter.CUNNING);
-                                case "2", "WISE" -> thisDragon.setCharacter(DragonCharacter.WISE);
-                                case "3", "CHAOTIC_EVIL" -> thisDragon.setCharacter(DragonCharacter.CHAOTIC_EVIL);
-                                case "4", "FICKLE" -> thisDragon.setCharacter(DragonCharacter.FICKLE);
-                            }
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "6" -> {
-                        String string = scanner.nextLine();
-                        try {
-                            thisDragon.getHead().setEyesCount(Double.parseDouble(string));
-                        } catch (NumberFormatException numberFormatException) {
-                            throw new InputMismatchException();
-                        }
-                    }
-                    case "7" -> {
-                        String xString = scanner.nextLine();
-                        if (xString.matches("([-+]?\\d+)")) {
-                            long x = Long.parseLong(xString);
-                            if (x > 610) {
-                                throw new InputMismatchException();
-                            }
-                            thisDragon.getCoordinates().setX(x);
-                        } else {
-                            throw new InputMismatchException();
-                        }
-                        String yString = scanner.nextLine();
-                        try {
-                            float y = Float.parseFloat(yString);
-                            thisDragon.getCoordinates().setY(y);
-                        } catch (NumberFormatException numberFormatException) {
-                            throw new InputMismatchException();
-                        }
-                    }
-                }
-                System.out.println("Параметр дракона успешно изменён");
-            } else {
-                scanner.nextLine();
-            }
-        } catch (NumberFormatException ignored) {
-            scanner.nextLine();
-            scanner.nextLine();
+            if (!dragonExists) throw new InputMismatchException();
+            fieldsUpdaterFromFile(parameters[0], parameters[1], thisDragon, scanner);
         } catch (InputMismatchException ignored) {}
+    }
+    /** Метод, считывающий обновляемое поле из фала
+     * @return возвращает массив, состоящий из номера обновляемого параметра и его нового значения */
+    private static String[] parametersReader(Scanner scanner) {
+        String[] parameters = new String[2];
+        for (int i = 0; i < parameters.length; ++i) {
+            try {
+                parameters[i] = scanner.nextLine();
+                if (parameters[i].trim().isEmpty()) parameters[i] = null;
+            } catch (NoSuchElementException noSuchElementException) {
+                parameters[i] = null;
+            }
+        }
+        return parameters;
+    }
+    /** Метод, обновляющий выбранное поле из файла
+     * @see UpdateCommand#updateNameFromFile(String, Dragon)
+     * @see UpdateCommand#updateAgeFromFile(String, Dragon)
+     * @see UpdateCommand#updateTypeFromFile(String, Dragon)
+     * @see UpdateCommand#updateColorFromFile(String, Dragon)
+     * @see UpdateCommand#updateCharacterFromFile(String, Dragon)
+     * @see UpdateCommand#updateHeadFromFile(String, Dragon)
+     * @see UpdateCommand#updateCoordinatesFromFile(String, Scanner, Dragon) */
+    private static void fieldsUpdaterFromFile(String parameter, String newValue, Dragon dragon, Scanner scanner) {
+        if (parameter.matches(("[1-7]"))) {
+            switch (parameter) {
+                case "1" -> updateNameFromFile(newValue, dragon);
+                case "2" -> updateAgeFromFile(newValue, dragon);
+                case "3" -> updateTypeFromFile(newValue, dragon);
+                case "4" -> updateColorFromFile(newValue, dragon);
+                case "5" -> updateCharacterFromFile(newValue, dragon);
+                case "6" -> updateHeadFromFile(newValue, dragon);
+                case "7" -> updateCoordinatesFromFile(newValue, scanner, dragon);
+            }
+            System.out.println("Параметр дракона успешно обновлён");
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий имя дракона на новое из файла */
+    private static void updateNameFromFile(String name, Dragon dragon) {
+        if (!name.trim().isEmpty()) {
+            dragon.setName(name);
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий возраст дракона на новый из файла */
+    private static void updateAgeFromFile(String ageString, Dragon dragon) {
+        try {
+            long age = Long.parseLong(ageString);
+            dragon.setAge(age);
+        } catch (NumberFormatException numberFormatException) {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий тип дракона на новый из файла */
+    private static void updateTypeFromFile(String type, Dragon dragon) {
+        if (type.matches("[1-3]") || type.equals("WATER") || type.equals("UNDERGROUND") || type.equals("FIRE")) {
+            switch (type) {
+                case "1", "WATER" -> dragon.setType(DragonType.WATER);
+                case "2", "UNDERGROUND" -> dragon.setType(DragonType.UNDERGROUND);
+                case "3", "FIRE" -> dragon.setType(DragonType.FIRE);
+            }
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий цвет дракона на новый из файла */
+    private static void updateColorFromFile(String color, Dragon dragon) {
+        if (color.matches("[1-3]") || color.equals("GREEN") || color.equals("ORANGE") || color.equals("BROWN") || color.isEmpty()) {
+            switch (color) {
+                case "1", "GREEN" -> dragon.setColor(Color.GREEN);
+                case "2", "ORANGE" -> dragon.setColor(Color.ORANGE);
+                case "3", "BROWN" -> dragon.setColor(Color.BROWN);
+                case "" -> dragon.setColor(null);
+            }
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий характер дракона на новый из файла */
+    private static void updateCharacterFromFile(String character, Dragon dragon) {
+        if (character.matches("[1-4]") || character.equals("CUNNING") || character.equals("WISE") || character.equals("CHAOTIC_EVIL") || character.equals("FICKLE")) {
+            switch (character) {
+                case "1", "CUNNING" -> dragon.setCharacter(DragonCharacter.CUNNING);
+                case "2", "WISE" -> dragon.setCharacter(DragonCharacter.WISE);
+                case "3", "CHAOTIC_EVIL" -> dragon.setCharacter(DragonCharacter.CHAOTIC_EVIL);
+                case "4", "FICKLE" -> dragon.setCharacter(DragonCharacter.FICKLE);
+            }
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий количество глаз дракона на новое из файла */
+    private static void updateHeadFromFile(String eyesCount, Dragon dragon) {
+        try {
+            dragon.getHead().setEyesCount(Double.parseDouble(eyesCount));
+        } catch (NumberFormatException numberFormatException) {
+            throw new InputMismatchException();
+        }
+    }
+    /** Метод, обновляющий координаты дракона на новые из файла */
+    private static void updateCoordinatesFromFile(String xString, Scanner scanner, Dragon dragon) {
+        try {
+            Long.parseLong(xString);
+        } catch (NumberFormatException numberFormatException) {
+            throw new InputMismatchException();
+        }
+        long x = Long.parseLong(xString);
+        if (x > 610) {
+            throw new InputMismatchException();
+        }
+        dragon.getCoordinates().setX(x);
+        try {
+            String yString = scanner.nextLine();
+            try {
+                float y = Float.parseFloat(yString);
+                dragon.getCoordinates().setY(y);
+            } catch (NumberFormatException numberFormatException) {
+                throw new InputMismatchException();
+            }
+        } catch (NoSuchElementException noSuchElementException) {
+            throw new InputMismatchException();
+        }
     }
     @Override
     public String description() {

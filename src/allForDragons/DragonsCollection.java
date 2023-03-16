@@ -1,16 +1,15 @@
 package allForDragons;
 
 import commands.Invoker;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
 public class DragonsCollection {
-
+    /** Статическая коллекция драконов, с которой работают все команды в программе */
     private static final LinkedHashSet<Dragon> dragons = new LinkedHashSet<>();
+    /** Поле, содержащее дату инициализации коллекции */
     private static final Date dateOfInitialization = new Date();
-
     public static LinkedHashSet<Dragon> getDragons() {
         return dragons;
     }
@@ -20,8 +19,9 @@ public class DragonsCollection {
                 "Дата инициализации: " + dateOfInitialization + "\n" +
                 "Количество элементов: " + dragons.size() + "\n");
     }
-    /**Метод для добавления драконов из файла в коллекцию*/
-    public static void putDragonsFromFile() {
+    /**Метод для добавления драконов из файла в коллекцию
+     * @return возвращает boolean в зависимости от того, существует файл или нет */
+    public static boolean putDragonsFromFile() {
         try {
             Scanner scanner = new Scanner(new File(Invoker.getFile()));
             String name;
@@ -60,9 +60,10 @@ public class DragonsCollection {
             }
             scanner.close();
             System.out.println("Из файла добавлено объектов в коллекцию: " + dragons.size());
+            return true;
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("Файл не найден");
+            return false;
         }
-
     }
 }

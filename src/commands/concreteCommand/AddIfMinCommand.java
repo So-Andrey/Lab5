@@ -10,7 +10,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AddIfMinCommand implements Command {
-    /**Метод, проверяющий, что дракон наименьший элемент в коллекции (по возрасту)
+    /**Метод, добавляющий в коллекцию нового дракона, если его возраст меньше имеющихся в коллекции
      * @see DragonAdder#dragonAdder()*/
     @Override
     public void execute() {
@@ -38,8 +38,8 @@ public class AddIfMinCommand implements Command {
      * @see DragonAdder#dragonFromFileAdder(Scanner) */
     protected static void adderIfMinFromFile(Scanner scanner) {
         try {
-            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             Dragon dragon = DragonAdder.dragonFromFileAdder(scanner);
+            ArrayList<Dragon> dragons = new ArrayList<>(DragonsCollection.getDragons());
             if (dragons.size() == 0) {
                 DragonsCollection.getDragons().add(dragon);
                 System.out.println("Новый элемент коллекции добавлен");

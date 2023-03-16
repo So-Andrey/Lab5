@@ -9,26 +9,14 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Invoker {
-
+    /** Поле, отвечающее за продолжение работы команды */
     private static boolean programRunning = true;
+    /** Поле, содержащее в себе введенные пользователем команду и её аргументы */
     private static String[] split;
+    /** Поле, содержащее путь к файлу, с которым взаимодействует программа */
     private static String file;
+    /** Коллекция, через которую осуществляется выполнение команд */
     private static final HashMap<String, Command> commandHashMap = new HashMap<>();
-    public static String[] getSplit() {
-        return split;
-    }
-    public static void setSplit(String[] split) {
-        Invoker.split = split;
-    }
-    public static String getFile() {
-        return file;
-    }
-    public static void setProgramRunning(boolean programRunning) {
-        Invoker.programRunning = programRunning;
-    }
-    public static HashMap<String, Command> getCommandHashMap() {
-        return commandHashMap;
-    }
     static {
         commandHashMap.put("help", new HelpCommand());
         commandHashMap.put("info", new InfoCommand());
@@ -47,9 +35,23 @@ public class Invoker {
         commandHashMap.put("count_by_head", new CountByHeadCommand());
         commandHashMap.put("print_ascending", new PrintAscendingCommand());
     }
-    /**Метод, реализующий работу с консолью*/
-    private static void startConsoleProgram() throws FileNotFoundException {
-        DragonsCollection.putDragonsFromFile();
+    public static String[] getSplit() {
+        return split;
+    }
+    public static void setSplit(String[] split) {
+        Invoker.split = split;
+    }
+    public static String getFile() {
+        return file;
+    }
+    public static void setProgramRunning(boolean programRunning) {
+        Invoker.programRunning = programRunning;
+    }
+    public static HashMap<String, Command> getCommandHashMap() {
+        return commandHashMap;
+    }
+    /** Метод, реализующий работу с консолью */
+    private static void startConsoleProgram() {
         System.out.println("Введите команду (help : вывести справку по доступным командам)");
         Scanner scanner = new Scanner(System.in);
         while (programRunning) {
@@ -67,13 +69,14 @@ public class Invoker {
         }
         scanner.close();
     }
-    /**Метод, проверяющий начальный файл и запускающий работу с коллекцией
-     * @see Invoker#startConsoleProgram() */
+    /**Метод, проверяющий заданный файл и начинающий работу с коллекцией
+     * @see Invoker#startConsoleProgram()
+     * @see DragonsCollection#putDragonsFromFile() */
     public static void invoker(String[] args) throws FileNotFoundException {
         if (args.length == 1) {
             file = args[0];
             if (new File(file).canRead() & new File(file).exists()) {
-                startConsoleProgram();
+                if (DragonsCollection.putDragonsFromFile()) startConsoleProgram();
             } else {
                 System.out.println("Нет доступа к файлу");
             }

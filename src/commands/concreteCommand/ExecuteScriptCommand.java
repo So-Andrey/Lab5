@@ -5,7 +5,6 @@ import commands.Invoker;
 import exceptions.InvalidCommandException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
@@ -15,7 +14,8 @@ public class ExecuteScriptCommand implements Command {
     /** Поле, отвечающее за остановку выполнения команды execute_script при достижении 10 её повторов */
     private boolean recursion = false;
 
-    /**Метод, считывающий команды из файла  */
+    /**Метод, считывающий команды из файла
+     * @see ExecuteScriptCommand#invokerFromFile(Scanner) */
     private void executorFromFile(String file) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(file));
         while (scanner.hasNext() & !recursion) {
@@ -32,7 +32,11 @@ public class ExecuteScriptCommand implements Command {
         }
         scanner.close();
     }
-    /**Метод, выполняющий команды из файла*/
+    /**Метод, выполняющий команды из файла
+     * @see AddCommand#adderFromFile(Scanner)
+     * @see AddIfMinCommand#adderIfMinFromFile(Scanner)
+     * @see UpdateCommand#updaterFromFile(Scanner)
+     * @see Command#execute() */
     private void invokerFromFile(Scanner scanner) {
         switch (Invoker.getSplit()[0]) {
             case "add" -> AddCommand.adderFromFile(scanner);
@@ -41,19 +45,24 @@ public class ExecuteScriptCommand implements Command {
             default -> Invoker.getCommandHashMap().get(Invoker.getSplit()[0]).execute();
         }
     }
+    /**Метод, выполняющий резолв путей, начинающихся с ~/
+     * @return возвращает путь к файлу в виде строки */
+    private String tildaResolver(String file) {
+        if (file.startsWith("~")) {
+            String rootDirectory = new File(Invoker.getFile()).getAbsolutePath().split("/")[1];
+            file = "/" + rootDirectory + file.split("~")[1];
+        }
+        return file;
+    }
     /**Метод, проверяющий файл и исполняющий скрипт из файла с помощью executorFromFile
+     * @see ExecuteScriptCommand#tildaResolver(String)
      * @see ExecuteScriptCommand#executorFromFile(String) */
     @Override
     public void execute() {
         try {
             if (Invoker.getSplit().length == 2) {
                 String file = Invoker.getSplit()[1];
-                if (file.startsWith("~")) {
-                    try {
-                        String rootDirectory = ExecuteScriptCommand.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath().split("/")[1];
-                        file = "/" + rootDirectory + file.split("~")[1];
-                    } catch (URISyntaxException ignored) {}
-                }
+                file = tildaResolver(file);
                 try {
                     if (new File(file).exists() & new File(file).canRead()) {
                         recursion = false;
