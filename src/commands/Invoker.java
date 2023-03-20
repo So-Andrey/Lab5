@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Invoker {
-    /** Поле, отвечающее за продолжение работы команды */
+    /** Поле, отвечающее за продолжение работы программы */
     private static boolean programRunning = true;
     /** Поле, содержащее в себе введенные пользователем команду и её аргументы */
     private static String[] split;

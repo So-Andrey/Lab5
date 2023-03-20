@@ -49,8 +49,10 @@ public class ExecuteScriptCommand implements Command {
      * @return возвращает путь к файлу в виде строки */
     private String tildaResolver(String file) {
         if (file.startsWith("~")) {
-            String rootDirectory = new File(Invoker.getFile()).getAbsolutePath().split("/")[1];
-            file = "/" + rootDirectory + file.split("~")[1];
+            try {
+                String rootDirectory = new File(Invoker.getFile()).getAbsolutePath().split("/")[1];
+                file = "/" + rootDirectory + file.split("~")[1];
+            } catch (Exception ignored) {}
         }
         return file;
     }
