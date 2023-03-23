@@ -5,7 +5,6 @@ import commands.Invoker;
 import exceptions.InvalidCommandException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.FileSystems;
 import java.util.Scanner;
 
 public class ExecuteScriptCommand implements Command {
@@ -50,14 +49,7 @@ public class ExecuteScriptCommand implements Command {
      * @return возвращает путь к файлу в виде строки */
     private String tildaResolver(String file) {
         if (file.startsWith("~")) {
-            try {
-                String separator = FileSystems.getDefault().getSeparator();
-                String rootDirectory = new File(Invoker.getFile()).getAbsolutePath().split(separator)[1];
-                file = rootDirectory + file.split("~")[1];
-                if (!separator.equals("\\\\")) {
-                    file = separator + file;
-                }
-            } catch (Exception ignored) {}
+            file = file.replace("~", System.getProperty("user.home"));
         }
         return file;
     }
